@@ -9,4 +9,11 @@ public class BoardTest {
         Board board = new Board();
         assertTrue(board.isEmpty());
     }
+
+    @Test
+    public void testAddAMarkToBoard() {
+        Board board = new Board();
+        board.markBoard(1, "X");
+        assertEquals("X", board.getMarkAtPosition(1));
+    }
 }
