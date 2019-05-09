@@ -17,4 +17,9 @@ public class Board {
         int index = position - 1;
         return grid.get(index);
     }
+
+    public Boolean isValidMove(int position) {
+        int index = position - 1;
+        return grid.get(index) != "X" && grid.get(index) != "O";
+    }
 }

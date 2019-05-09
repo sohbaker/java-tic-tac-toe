@@ -1,7 +1,6 @@
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class BoardTest {
     @Test
@@ -16,4 +15,12 @@ public class BoardTest {
         board.markBoard(1, "X");
         assertEquals("X", board.getMarkAtPosition(1));
     }
+
+    @Test
+    public void testChecksIfAMoveIsValid() {
+        Board board = new Board();
+        board.markBoard(1, "X");
+        assertFalse(board.isValidMove(1));
+    }
+
 }
