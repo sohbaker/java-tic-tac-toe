@@ -1,17 +1,12 @@
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class BoardTest {
     @Test
-    public void testAppHasABoard() {
-        Board classUnderTest = new Board();
-        assertEquals("Hello world.", classUnderTest.getBoard());
-    }
-
-    @Test
-    public void testBoardPrintsOutABoard() {
-        Board classunderTest = new Board();
-        assertEquals("1", classunderTest.printBoard());
+    public void testNewBoardIsEmpty() {
+        Board board = new Board();
+        assertTrue(board.isEmpty());
     }
 }
