@@ -22,4 +22,10 @@ public class Board {
         int index = position - 1;
         return grid.get(index) != "X" && grid.get(index) != "O";
     }
+
+    public Boolean playerHasWon(String mark) {
+        // knows what the winning combinations for the board are
+        // checks the mark against those winning combinations
+        // returns true if the same mark is present for all positions in a winning combination
+    }
 }

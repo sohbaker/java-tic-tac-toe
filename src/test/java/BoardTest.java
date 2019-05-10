@@ -23,4 +23,13 @@ public class BoardTest {
         assertFalse(board.isValidMove(1));
     }
 
+    @Test
+    public void testKnowsThatAPlayerHasWon() {
+        Board board = new Board();
+        board.markBoard(1, "X");
+        board.markBoard(2, "X");
+        board.markBoard(3, "X");
+        assertTrue(board.playerHasWon("X"));
+    }
+
 }
