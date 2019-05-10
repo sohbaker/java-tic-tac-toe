@@ -27,13 +27,14 @@ public class Board {
 
     public Boolean playerHasWon(String mark) {
         boolean win = false;
-        int countOccurenceOfMark = 0;
+        Integer countOccurenceOfMark = 0;
         for (int i = 0; i < allWinningCombinations.length; i++) {
             int[] singleCombination = allWinningCombinations[i];
             if(mark.equals(grid.get(singleCombination[0])) ) countOccurenceOfMark++;
             if(mark.equals(grid.get(singleCombination[1])) ) countOccurenceOfMark++;
             if(mark.equals(grid.get(singleCombination[2])) ) countOccurenceOfMark++;
-            if(countOccurenceOfMark == 3) win = true;
+            if(countOccurenceOfMark.equals(3) ) win = true;
+            countOccurenceOfMark = 0;
         }
         return win;
     }

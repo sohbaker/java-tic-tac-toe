@@ -32,4 +32,12 @@ public class BoardTest {
         assertTrue(board.playerHasWon("X"));
     }
 
+    @Test
+    public void testKnowsThatThePlayerHasNotWon() {
+        Board board = new Board();
+        board.markBoard(1, "X");
+        board.markBoard(2, "X");
+        assertFalse(board.playerHasWon("X"));
+    }
+
 }
