@@ -5,6 +5,8 @@ import java.util.List;
 public class Board {
     public List grid = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
 
+    public static final int[][] allWinningCombinations = { {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {2, 4, 6}, {0, 4, 8} };
+
     public Boolean isEmpty() {
         return !grid.contains("X") && !grid.contains("O");
     }
@@ -24,8 +26,15 @@ public class Board {
     }
 
     public Boolean playerHasWon(String mark) {
-        // knows what the winning combinations for the board are
-        // checks the mark against those winning combinations
-        // returns true if the same mark is present for all positions in a winning combination
+        boolean win = false;
+        int countOccurenceOfMark = 0;
+        for (int i = 0; i < allWinningCombinations.length; i++) {
+            int[] singleCombination = allWinningCombinations[i];
+            if(mark.equals(grid.get(singleCombination[0])) ) countOccurenceOfMark++;
+            if(mark.equals(grid.get(singleCombination[1])) ) countOccurenceOfMark++;
+            if(mark.equals(grid.get(singleCombination[2])) ) countOccurenceOfMark++;
+            if(countOccurenceOfMark == 3) win = true;
+        }
+        return win;
     }
 }
