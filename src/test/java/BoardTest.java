@@ -19,7 +19,14 @@ public class BoardTest {
     }
 
     @Test
-    public void testChecksIfAMoveIsValid() {
+    public void testKnowThatAMoveIsValid() {
+        Board board = new Board();
+        board.markBoard(1, "X");
+        assertTrue(board.isValidMove(2));
+    }
+
+    @Test
+    public void testKnowsThatAMoveIsNotValid() {
         Board board = new Board();
         board.markBoard(1, "X");
         assertFalse(board.isValidMove(1));
