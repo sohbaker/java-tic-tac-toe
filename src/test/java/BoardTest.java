@@ -55,4 +55,12 @@ public class BoardTest {
         assertTrue(board.isFull());
     }
 
+    @Test
+    public void testKnowsThatTheBoardIsNotFull() {
+        Board board = new Board();
+        board.markBoard(1, "X");
+        board.markBoard(2, "X");
+        assertFalse(board.isFull());
+    }
+
 }

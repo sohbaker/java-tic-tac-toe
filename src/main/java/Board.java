@@ -46,4 +46,5 @@ public class Board {
         }
         return numberOfCellsOnBoard == 0;
     }
+
 }
