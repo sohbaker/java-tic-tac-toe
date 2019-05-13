@@ -1,5 +1,7 @@
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class BoardTest {
@@ -63,4 +65,11 @@ public class BoardTest {
         assertFalse(board.isFull());
     }
 
+    @Test
+    public void testKnowsWhatCellsAreStillAvailable() {
+        Board board = new Board();
+        board.markBoard(1, "X");
+        List availableMoves = board.availableMoves();
+        assertFalse(availableMoves.isEmpty());
+    }
 }

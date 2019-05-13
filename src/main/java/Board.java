@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Board {
-    public List grid = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    public final List grid = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
 
     public static final int[][] allWinningCombinations = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {2, 4, 6}, {0, 4, 8}};
 
@@ -47,4 +47,11 @@ public class Board {
         return numberOfCellsOnBoard == 0;
     }
 
+    public List availableMoves() {
+        List<Integer> availableCells = new ArrayList<>();
+        for (int i = 0; i < grid.size(); i++) {
+            if (grid.get(i) != "X" && grid.get(i) != "O") availableCells.add(i + 1);
+        }
+        return availableCells;
+    }
 }
