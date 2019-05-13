@@ -38,4 +38,12 @@ public class Board {
         }
         return win;
     }
+
+    public Boolean isFull() {
+        Integer numberOfCellsOnBoard = grid.size();
+        for (int i = 0; i < grid.size(); i++) {
+            if(grid.get(i) == "X" || grid.get(i) == "O") numberOfCellsOnBoard--;
+        }
+        return numberOfCellsOnBoard == 0;
+    }
 }

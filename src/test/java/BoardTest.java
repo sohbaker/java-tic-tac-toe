@@ -40,4 +40,19 @@ public class BoardTest {
         assertFalse(board.playerHasWon("X"));
     }
 
+    @Test
+    public void testKnowsThatTheBoardIsFull() {
+        Board board = new Board();
+        board.markBoard(1, "X");
+        board.markBoard(2, "X");
+        board.markBoard(3, "X");
+        board.markBoard(4, "X");
+        board.markBoard(5, "X");
+        board.markBoard(6, "X");
+        board.markBoard(7, "X");
+        board.markBoard(8, "X");
+        board.markBoard(9, "X");
+        assertTrue(board.isFull());
+    }
+
 }
