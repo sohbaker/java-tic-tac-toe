@@ -8,4 +8,10 @@ public class DisplayTest {
         Display display = new Display();
         assertEquals("Welcome!", display.greeting());
     }
+
+    @Test
+    public void testDisplayPromptsPlayer() {
+        Display display = new Display();
+        assertEquals("Make a move: X", display.promptPlayer("X"));
+    }
 }
