@@ -3,30 +3,35 @@ import java.util.List;
 
 public class Display {
     public String greeting() {
-        String x = "Welcome!";
-        return x;
+        return "Welcome";
     }
 
     public String promptPlayer(String playerMark) {
-        String prompt = String.format("Make a move: %s", playerMark);
-        return prompt;
+       return String.format("Make a move: %s", playerMark);
     }
 
-    public String createArrayListOfCurrentGrid(Board board, int size) {
-        List currentBoardAsArray = new ArrayList<>();
+    private List currentGridCells(Board board, int size) {
+        List currentGridAsArray = new ArrayList<>();
         Board boardClass = board;
         int boardSize = size;
         int count = 1;
 
         while (count <= boardSize) {
             String cell = boardClass.getCellAtPosition(count);
-            currentBoardAsArray.add(cell);
+            currentGridAsArray.add(cell);
             count++;
         }
 
-        String boardArraysAsString = currentBoardAsArray.toString();
-        String arrayStringWithoutBrackets = boardArraysAsString.replace("[", "").replace("]","");
+        return currentGridAsArray;
+    }
 
-        return arrayStringWithoutBrackets;
+    public String showBoardGrid(Board board, int size) {
+        List gridCells = currentGridCells(board, size);
+
+        String row1 = gridCells.get(0) + " | " + gridCells.get(1) + " | " + gridCells.get(2) + "\n";
+        String row2 = gridCells.get(3) + " | " + gridCells.get(4) + " | " + gridCells.get(5) + "\n";
+        String row3 = gridCells.get(6) + " | " + gridCells.get(7) + " | " + gridCells.get(8);
+
+        return row1 + row2 + row3;
     }
 }

@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import static org.hamcrest.core.StringStartsWith.startsWith;
 import static org.junit.Assert.*;
 
 public class DisplayTest {
@@ -16,10 +17,11 @@ public class DisplayTest {
     }
 
     @Test
-    public void testShowsAnEmptyBoard() {
+    public void testPrintsABoard() {
         Display display = new Display();
         Board board = new Board();
-        int boardSize = board.getSize();
-        assertEquals("1, 2, 3, 4, 5, 6, 7, 8, 9", display.createArrayListOfCurrentGrid(board, boardSize));
+        int size = board.getSize();
+        String displayedBoard = display.showBoardGrid(board, size);
+        assertEquals("1 | 2 | 3\n4 | 5 | 6\n7 | 8 | 9", displayedBoard);
     }
 }
