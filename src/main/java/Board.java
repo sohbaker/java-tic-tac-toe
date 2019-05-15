@@ -11,13 +11,13 @@ public class Board {
         return !grid.contains("X") && !grid.contains("O");
     }
 
-    public Object markBoard(int position, String mark) {
-        return grid.set(position - 1, mark);
+    public void markBoard(int position, String mark) {
+       grid.set(position - 1, mark);
     }
 
-    public Object getMarkAtPosition(int position) {
+    public String getMarkAtPosition(int position) {
         int index = position - 1;
-        return grid.get(index);
+        return grid.get(index).toString();
     }
 
     public Boolean isValidMove(int position) {
@@ -49,5 +49,13 @@ public class Board {
             if (grid.get(i) != "X" && grid.get(i) != "O") availableCells.add(i + 1);
         }
         return availableCells;
+    }
+
+    public String getCellAtPosition(int i) {
+        return grid.get(i - 1).toString();
+    }
+
+    public int getSize() {
+        return grid.size();
     }
 }

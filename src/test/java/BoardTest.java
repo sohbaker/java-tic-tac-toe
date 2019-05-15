@@ -19,7 +19,7 @@ public class BoardTest {
     }
 
     @Test
-    public void testKnowThatAMoveIsValid() {
+    public void testKnowsThatAMoveIsValid() {
         Board board = new Board();
         board.markBoard(1, "X");
         assertTrue(board.isValidMove(2));
@@ -78,5 +78,24 @@ public class BoardTest {
         board.markBoard(1, "X");
         List availableMoves = board.availableMoves();
         assertFalse(availableMoves.isEmpty());
+    }
+
+    @Test
+    public void testReturnsTheMarkAtARequestedPosition() {
+        Board board = new Board();
+        board.markBoard(1, "X");
+        assertEquals("X", board.getCellAtPosition(1));
+    }
+
+    @Test
+    public void testReturnsTheEmptyCellAtARequestedPosition() {
+        Board board = new Board();
+        assertEquals("1", board.getCellAtPosition(1));
+    }
+
+    @Test
+    public void testKnowsTheSizeOfTheBoard() {
+        Board board = new Board();
+        assertEquals(9, board.getSize());
     }
 }
