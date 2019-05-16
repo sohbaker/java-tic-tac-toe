@@ -52,4 +52,10 @@ public class DisplayTest {
         display.announceTie();
         assertThat(outputContent.toString(), containsString("It\'s a tie!"));
     }
+
+    @Test
+    public void notifyOfAnInvalidChoice() {
+        display.notifyInvalid("move");
+        assertThat(outputContent.toString(), containsString("Invalid move"));
+    }
   }

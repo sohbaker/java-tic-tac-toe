@@ -7,8 +7,7 @@ public class Display {
     }
 
     public void promptPlayer(String playerMark) {
-        String prompt = String.format("Make a move: %s", playerMark);
-        System.out.println(prompt);
+        System.out.println(String.format("Make a move: %s", playerMark));
     }
 
     private List currentGridCells(Board board, int size) {
@@ -41,5 +40,9 @@ public class Display {
 
     public void announceTie() {
         System.out.println("It\'s a tie!");
+    }
+
+    public void notifyInvalid(String prompt) {
+        System.out.println(String.format("Invalid %s", prompt));
     }
 }
