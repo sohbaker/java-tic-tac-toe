@@ -1,9 +1,6 @@
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
@@ -11,9 +8,11 @@ import static org.junit.Assert.assertThat;
 public class DisplayTest {
     private final ByteArrayOutputStream outputContent = new ByteArrayOutputStream();
     private final PrintStream defaultOut = System.out;
+    private Display display;
 
     @Before
     public void setUpStreams() {
+        display = new Display();
         System.setOut(new PrintStream(outputContent));
     }
 
@@ -23,25 +22,22 @@ public class DisplayTest {
     }
 
     @Test
-    public void printsWelcome() {
-        Display display = new Display();
-        display.greeting();
+    public void printsGreeting() {
+        display.printGreeting();
         assertThat(outputContent.toString(), containsString("Welcome!"));
     }
 
     @Test
-    public void testPromptsPlayer() {
-        Display display = new Display();
+    public void promptsPlayerToMakeAMove() {
         display.promptPlayer("X");
         assertThat(outputContent.toString(), containsString("Make a move: X"));
     }
 
     @Test
-    public void testPrintsABoard() {
-        Display display = new Display();
+    public void printsTheGrid() {
         Board board = new Board();
         int size = board.getSize();
-        display.showBoardGrid(board, size);
+        display.printGrid(board, size);
         assertThat(outputContent.toString(), containsString("1 | 2 | 3\n4 | 5 | 6\n7 | 8 | 9"));
     }
   }

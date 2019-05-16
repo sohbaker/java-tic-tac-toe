@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Display {
-    public void greeting() {
+    public void printGreeting() {
         System.out.println("Welcome!");
     }
 
@@ -22,11 +22,10 @@ public class Display {
             currentGridAsArray.add(cell);
             count++;
         }
-
         return currentGridAsArray;
     }
 
-    public void showBoardGrid(Board board, int size) {
+    public void printGrid(Board board, int size) {
         List gridCells = currentGridCells(board, size);
 
         String row1 = gridCells.get(0) + " | " + gridCells.get(1) + " | " + gridCells.get(2) + "\n";
