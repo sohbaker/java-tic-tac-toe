@@ -38,4 +38,8 @@ public class Display {
     public void announceWinner(String playerMark) {
         System.out.println(String.format("Player %s wins!", playerMark));
     }
+
+    public void announceTie() {
+        System.out.println("It\'s a tie!");
+    }
 }

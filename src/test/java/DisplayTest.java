@@ -42,8 +42,14 @@ public class DisplayTest {
     }
 
     @Test
-    public void printsTheWinner() {
+    public void announcesTheWinner() {
         display.announceWinner("X");
         assertThat(outputContent.toString(), containsString("Player X wins!"));
+    }
+
+    @Test
+    public void announcesATiedGame() {
+        display.announceTie();
+        assertThat(outputContent.toString(), containsString("It\'s a tie!"));
     }
   }
