@@ -34,4 +34,8 @@ public class Display {
 
         System.out.println(row1 + row2 + row3);
     }
+
+    public void announceWinner(String playerMark) {
+        System.out.println(String.format("Player %s wins!", playerMark));
+    }
 }

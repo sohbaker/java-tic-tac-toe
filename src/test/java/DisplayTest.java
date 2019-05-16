@@ -40,4 +40,10 @@ public class DisplayTest {
         display.printGrid(board, size);
         assertThat(outputContent.toString(), containsString("1 | 2 | 3\n4 | 5 | 6\n7 | 8 | 9"));
     }
+
+    @Test
+    public void printsTheWinner() {
+        display.announceWinner("X");
+        assertThat(outputContent.toString(), containsString("Player X wins!"));
+    }
   }
