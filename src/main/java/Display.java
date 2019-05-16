@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Display {
     public void printGreeting() {
-        System.out.println("Welcome!");
+        System.out.println("Welcome to TicTacToe!");
     }
 
     public void promptPlayer(String playerMark) {

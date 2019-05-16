@@ -24,7 +24,7 @@ public class DisplayTest {
     @Test
     public void printsGreeting() {
         display.printGreeting();
-        assertThat(outputContent.toString(), containsString("Welcome!"));
+        assertThat(outputContent.toString(), containsString("Welcome"));
     }
 
     @Test
