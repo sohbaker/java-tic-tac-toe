@@ -13,10 +13,10 @@ public class Display {
     private List currentGridCells(Board board, int size) {
         List currentGridAsArray = new ArrayList<>();
         Board boardClass = board;
-        int boardSize = size;
+        int gridSize = size;
         int count = 1;
 
-        while (count <= boardSize) {
+        while (count <= gridSize) {
             String cell = boardClass.getCellAtPosition(count);
             currentGridAsArray.add(cell);
             count++;
