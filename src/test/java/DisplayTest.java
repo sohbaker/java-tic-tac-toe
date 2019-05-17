@@ -1,6 +1,12 @@
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
@@ -57,5 +63,14 @@ public class DisplayTest {
     public void notifyOfAnInvalidChoice() {
         display.notifyInvalid("move");
         assertThat(outputContent.toString(), containsString("Invalid move"));
+    }
+
+    @Test
+    public void receivesAnIntInputFromAUser() {
+        InputStream stdin = System.in;
+        System.setIn(new ByteArrayInputStream("1".getBytes()));
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(scanner.nextLine());
+        System.setIn(stdin);
     }
   }

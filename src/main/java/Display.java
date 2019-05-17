@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Display {
     public void printGreeting() {
@@ -10,8 +11,8 @@ public class Display {
         System.out.println(String.format("Make a move: %s", playerMark));
     }
 
-    private List currentGridCells(Board board, int size) {
-        List currentGridAsArray = new ArrayList<>();
+    private List<String> currentGridCells(Board board, int size) {
+        List<String> currentGridAsArray = new ArrayList<>();
         Board boardClass = board;
         int gridSize = size;
         int count = 1;
@@ -25,7 +26,7 @@ public class Display {
     }
 
     public void printGrid(Board board, int size) {
-        List gridCells = currentGridCells(board, size);
+        List<String> gridCells = currentGridCells(board, size);
 
         String row1 = gridCells.get(0) + " | " + gridCells.get(1) + " | " + gridCells.get(2) + "\n";
         String row2 = gridCells.get(3) + " | " + gridCells.get(4) + " | " + gridCells.get(5) + "\n";
@@ -44,5 +45,10 @@ public class Display {
 
     public void notifyInvalid(String prompt) {
         System.out.println(String.format("Invalid %s", prompt));
+    }
+
+    public int takeIntInputFromUser() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 }
