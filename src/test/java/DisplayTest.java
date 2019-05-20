@@ -2,18 +2,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
+import java.io.*;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 
 public class DisplayTest {
     private final ByteArrayOutputStream outputContent = new ByteArrayOutputStream();
     private final PrintStream defaultOut = System.out;
+    private final InputStream defaultIn = System.in;
     private Display display;
 
     @Before
@@ -25,6 +23,7 @@ public class DisplayTest {
     @After
     public void revertStreams() {
         System.setOut(defaultOut);
+        System.setIn(defaultIn);
     }
 
     @Test
@@ -66,11 +65,10 @@ public class DisplayTest {
     }
 
     @Test
-    public void receivesAnIntInputFromAUser() {
-        InputStream stdin = System.in;
-        System.setIn(new ByteArrayInputStream("1".getBytes()));
-        Scanner scanner = new Scanner(System.in);
-        System.out.println(scanner.nextLine());
-        System.setIn(stdin);
+    public void receivesAnInputFromAUser() throws IOException {
+        String sample = "sample text";
+        InputStream stream = new ByteArrayInputStream((sample+"\n").getBytes());
+        System.setIn(stream);
+        assertEquals(sample, display.getInput());
     }
   }

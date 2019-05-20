@@ -1,6 +1,8 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Display {
     public void printGreeting() {
@@ -47,8 +49,8 @@ public class Display {
         System.out.println(String.format("Invalid %s", prompt));
     }
 
-    public int takeIntInputFromUser() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+    public static String getInput() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        return reader.readLine();
     }
 }
