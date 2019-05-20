@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-public class Human {
+class Human implements Player {
     private String mark;
     private Display display;
 
