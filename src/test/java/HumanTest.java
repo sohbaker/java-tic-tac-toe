@@ -11,7 +11,6 @@ public class HumanTest {
     @Before
     public void setUp() {
        human = new Human("X", display);
-
     }
 
     @After
