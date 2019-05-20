@@ -13,7 +13,8 @@ public class Human {
         return this.mark;
     }
 
-    public String getMove() throws IOException {
-        return display.getInput();
+    public int getMove() throws IOException{
+        String move = display.getInput();
+        return Integer.parseInt(move);
     }
 }
