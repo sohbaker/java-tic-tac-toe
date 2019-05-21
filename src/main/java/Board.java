@@ -10,7 +10,7 @@ public class Board {
     private static final String[] PLAYER_MARKS = {"X", "O"};
 
     public Boolean isEmpty() {
-        return !grid.contains("X") && !grid.contains("O");
+        return !grid.contains(PLAYER_MARKS[0]) && !grid.contains(PLAYER_MARKS[1]);
     }
 
     public void markBoard(int position, String mark) {
@@ -19,7 +19,7 @@ public class Board {
 
     public Boolean isValidMove(int position) {
         int index = position - 1;
-        return grid.get(index) != "X" && grid.get(index) != "O";
+        return grid.get(index) != PLAYER_MARKS[0] && grid.get(index) != PLAYER_MARKS[1];
     }
 
     public Boolean playerHasWon(String mark) {
@@ -43,7 +43,7 @@ public class Board {
     public List availableMoves() {
         List<Integer> availableCells = new ArrayList<>();
         for (int i = 0; i < grid.size(); i++) {
-            if (grid.get(i) != "X" && grid.get(i) != "O") availableCells.add(i + 1);
+            if (grid.get(i) != PLAYER_MARKS[0] && grid.get(i) != PLAYER_MARKS[1]) availableCells.add(i + 1);
         }
         return availableCells;
     }
