@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public class Game {
     private final Display display;
     private final Player playerOne;
@@ -24,8 +22,10 @@ public class Game {
         return over;
     }
 
-    public void play() throws IOException {
+    public void play() {
         while (!isOver()) {
+            display.printGrid(board);
+            display.promptPlayer(currentPlayer.getMark());
             int move = this.currentPlayer.getMove();
             this.board.markBoard(move, this.currentPlayer.getMark());
             if(!this.board.playerHasWon(this.currentPlayer.getMark())) {

@@ -4,6 +4,8 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 public class Display {
+    String userInput;
+
     public void printGreeting() {
         System.out.println("Welcome to TicTacToe!");
     }
@@ -36,8 +38,13 @@ public class Display {
         System.out.println(String.format("Invalid %s", prompt));
     }
 
-    public static String getInput() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        return reader.readLine();
+    public String getInput() {
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            this.userInput = reader.readLine();
+        } catch (IOException e) {
+            System.out.println("Trouble reading input: " + e);
+        }
+        return this.userInput;
     }
 }
