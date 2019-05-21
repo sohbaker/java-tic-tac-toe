@@ -72,4 +72,25 @@ public class Board {
         return opponent;
     }
 
+    public boolean isATie() {
+        boolean tie = false;
+
+        if((isFull() && !playerHasWon(PLAYER_MARKS[0])) || (isFull() && !playerHasWon(PLAYER_MARKS[1]))) {
+            tie = true;
+        }
+        return tie;
+    }
+
+    public List gridCells() {
+       List<String> gridCells = new ArrayList<>();
+        int gridSize = getSize();
+        int count = 1;
+
+        while (count <= gridSize) {
+            String cell = getCellAtPosition(count);
+            gridCells.add(cell);
+            count++;
+        }
+        return gridCells;
+    }
 }
