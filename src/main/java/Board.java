@@ -9,7 +9,7 @@ public class Board {
 
     private static final String[] PLAYER_MARKS = {"X", "O"};
 
-    public Boolean isEmpty() {
+    public boolean isEmpty() {
         return !grid.contains(PLAYER_MARKS[0]) && !grid.contains(PLAYER_MARKS[1]);
     }
 
@@ -17,14 +17,14 @@ public class Board {
        grid.set(position - 1, mark);
     }
 
-    public Boolean isValidMove(int position) {
+    public boolean isValidMove(int position) {
         int index = position - 1;
         return grid.get(index) != PLAYER_MARKS[0] && grid.get(index) != PLAYER_MARKS[1];
     }
 
-    public Boolean playerHasWon(String mark) {
+    public boolean playerHasWon(String mark) {
         boolean win = false;
-        Integer countOccurenceOfMark = 0;
+        int countOccurenceOfMark = 0;
         for (int i = 0; i < ALL_WINNING_COMBINATIONS.length; i++) {
             int[] singleCombination = ALL_WINNING_COMBINATIONS[i];
             for (int b = 0; b < singleCombination.length; b++) {
@@ -36,7 +36,7 @@ public class Board {
         return win;
     }
 
-    public Boolean isFull() {
+    public boolean isFull() {
         return availableMoves().isEmpty();
     }
 
