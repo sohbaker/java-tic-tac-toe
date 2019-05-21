@@ -15,7 +15,7 @@ public class BoardTest {
     public void testAddAMarkToBoard() {
         Board board = new Board();
         board.markBoard(1, "X");
-        assertEquals("X", board.getMarkAtPosition(1));
+        assertEquals("X", board.getCellAtPosition(1));
     }
 
     @Test
@@ -91,12 +91,6 @@ public class BoardTest {
     public void testReturnsTheEmptyCellAtARequestedPosition() {
         Board board = new Board();
         assertEquals("1", board.getCellAtPosition(1));
-    }
-
-    @Test
-    public void testKnowsTheSizeOfTheBoard() {
-        Board board = new Board();
-        assertEquals(9, board.getSize());
     }
 
     @Test

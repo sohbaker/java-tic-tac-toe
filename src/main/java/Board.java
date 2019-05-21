@@ -3,11 +3,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Board {
-    public final List grid = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    private final List grid = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
 
-    public static final int[][] ALL_WINNING_COMBINATIONS = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {2, 4, 6}, {0, 4, 8}};
+    private static final int[][] ALL_WINNING_COMBINATIONS = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {2, 4, 6}, {0, 4, 8}};
 
-    public static final String[] PLAYER_MARKS = {"X", "O"};
+    private static final String[] PLAYER_MARKS = {"X", "O"};
 
     public Boolean isEmpty() {
         return !grid.contains("X") && !grid.contains("O");
@@ -15,11 +15,6 @@ public class Board {
 
     public void markBoard(int position, String mark) {
        grid.set(position - 1, mark);
-    }
-
-    public String getMarkAtPosition(int position) {
-        int index = position - 1;
-        return grid.get(index).toString();
     }
 
     public Boolean isValidMove(int position) {
@@ -57,10 +52,6 @@ public class Board {
         return grid.get(i - 1).toString();
     }
 
-    public int getSize() {
-        return grid.size();
-    }
-
     public String getOpponentMark(String mark) {
         String opponent = null;
 
@@ -83,10 +74,9 @@ public class Board {
 
     public List gridCells() {
        List<String> gridCells = new ArrayList<>();
-        int gridSize = getSize();
         int count = 1;
 
-        while (count <= gridSize) {
+        while (count <= grid.size()) {
             String cell = getCellAtPosition(count);
             gridCells.add(cell);
             count++;
