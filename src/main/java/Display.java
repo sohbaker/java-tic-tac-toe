@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Display {
@@ -13,28 +12,16 @@ public class Display {
         System.out.println(String.format("Make a move: %s", playerMark));
     }
 
-    private List<String> currentGridCells(Board board, int size) {
-        List<String> currentGridAsArray = new ArrayList<>();
-        Board boardClass = board;
-        int gridSize = size;
-        int count = 1;
-
-        while (count <= gridSize) {
-            String cell = boardClass.getCellAtPosition(count);
-            currentGridAsArray.add(cell);
-            count++;
-        }
-        return currentGridAsArray;
-    }
-
-    public void printGrid(Board board, int size) {
-        List<String> gridCells = currentGridCells(board, size);
+    public void printGrid(Board board) {
+        List gridCells = board.gridCells();
 
         String row1 = gridCells.get(0) + " | " + gridCells.get(1) + " | " + gridCells.get(2) + "\n";
         String row2 = gridCells.get(3) + " | " + gridCells.get(4) + " | " + gridCells.get(5) + "\n";
         String row3 = gridCells.get(6) + " | " + gridCells.get(7) + " | " + gridCells.get(8);
 
-        System.out.println(row1 + row2 + row3);
+        String wholeGrid = row1 + row2 +row3;
+
+        System.out.println(wholeGrid);
     }
 
     public void announceWinner(String playerMark) {
