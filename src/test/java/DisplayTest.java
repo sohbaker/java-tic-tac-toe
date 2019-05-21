@@ -1,7 +1,4 @@
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
+import org.junit.*;
 import java.io.*;
 
 import static junit.framework.TestCase.assertEquals;
@@ -42,7 +39,7 @@ public class DisplayTest {
     public void printsTheGrid() {
         Board board = new Board();
         int size = board.getSize();
-        display.printGrid(board, size);
+        display.printGrid(board);
         assertThat(outputContent.toString(), containsString("1 | 2 | 3\n4 | 5 | 6\n7 | 8 | 9"));
     }
 

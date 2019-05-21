@@ -98,4 +98,10 @@ public class BoardTest {
         Board board = new Board();
         assertEquals(9, board.getSize());
     }
+
+    @Test
+    public void returnsTheOpponentsMark() {
+        Board board = new Board();
+        assertEquals("O", board.getOpponentMark("X"));
+    }
 }

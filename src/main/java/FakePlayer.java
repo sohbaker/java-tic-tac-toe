@@ -1,0 +1,24 @@
+import java.util.*;
+
+class FakePlayer implements Player {
+    private String mark;
+    private Display display;
+    private LinkedList<String> newMoves = new LinkedList<String>();
+    private List<String> moves;
+
+    FakePlayer(String mark, Display display, List<String> moves) {
+        this.mark = mark;
+        this.display = display;
+        this.moves = moves;
+    }
+
+    public String getMark() {
+        return this.mark;
+    }
+
+    public int getMove() {
+        this.newMoves.addAll(this.moves);
+        String move = this.newMoves.pollFirst();
+        return Integer.parseInt(move);
+    }
+}

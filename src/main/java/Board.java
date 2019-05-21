@@ -5,7 +5,9 @@ import java.util.List;
 public class Board {
     public final List grid = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
 
-    public static final int[][] allWinningCombinations = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {2, 4, 6}, {0, 4, 8}};
+    public static final int[][] ALL_WINNING_COMBINATIONS = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {2, 4, 6}, {0, 4, 8}};
+
+    public static final String[] PLAYER_MARKS = {"X", "O"};
 
     public Boolean isEmpty() {
         return !grid.contains("X") && !grid.contains("O");
@@ -28,8 +30,8 @@ public class Board {
     public Boolean playerHasWon(String mark) {
         boolean win = false;
         Integer countOccurenceOfMark = 0;
-        for (int i = 0; i < allWinningCombinations.length; i++) {
-            int[] singleCombination = allWinningCombinations[i];
+        for (int i = 0; i < ALL_WINNING_COMBINATIONS.length; i++) {
+            int[] singleCombination = ALL_WINNING_COMBINATIONS[i];
             for (int b = 0; b < singleCombination.length; b++) {
                 if (mark.equals(grid.get(singleCombination[b]))) countOccurenceOfMark++;
                 if (countOccurenceOfMark.equals(3)) win = true;
@@ -57,5 +59,38 @@ public class Board {
 
     public int getSize() {
         return grid.size();
+    }
+
+    public String getOpponentMark(String mark) {
+        String opponent = null;
+
+        for (int i = 0; i < PLAYER_MARKS.length; i++) {
+            if(PLAYER_MARKS[i] != mark) {
+              opponent = PLAYER_MARKS[i];
+            }
+        }
+        return opponent;
+    }
+
+    public boolean isATie() {
+        boolean tie = false;
+
+        if((isFull() && !playerHasWon(PLAYER_MARKS[0])) || (isFull() && !playerHasWon(PLAYER_MARKS[1]))) {
+            tie = true;
+        }
+        return tie;
+    }
+
+    public List gridCells() {
+       List<String> gridCells = new ArrayList<>();
+        int gridSize = getSize();
+        int count = 1;
+
+        while (count <= gridSize) {
+            String cell = getCellAtPosition(count);
+            gridCells.add(cell);
+            count++;
+        }
+        return gridCells;
     }
 }
