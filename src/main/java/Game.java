@@ -1,22 +1,53 @@
+import java.io.IOException;
+
 public class Game {
     private final Display display;
     private final Player playerOne;
     private final Player playerTwo;
+    private Player currentPlayer;
     private Board board;
 
     public Game(Board currentBoard, Display currentDisplay, Player player1, Player player2) {
-        board = currentBoard;
-        display = currentDisplay;
-        playerOne = player1;
-        playerTwo = player2;
+        this.board = currentBoard;
+        this.display = currentDisplay;
+        this.currentPlayer = player1;
+        this.playerOne = player1;
+        this.playerTwo = player2;
     }
 
     public boolean isOver() {
         boolean over = false;
 
-        if (board.isFull() || board.playerHasWon(playerOne.getMark()) || board.playerHasWon(playerTwo.getMark())) {
+        if (this.board.isFull() || this.board.playerHasWon(this.playerOne.getMark()) || this.board.playerHasWon(this.playerTwo.getMark())) {
             over = true;
         }
         return over;
+    }
+
+    public void play() throws IOException {
+        while (!isOver()) {
+            int move = this.currentPlayer.getMove();
+            this.board.markBoard(move, this.currentPlayer.getMark());
+            if(!this.board.playerHasWon(this.currentPlayer.getMark())) {
+                togglePlayer();
+            }
+        }
+        showOutcome(this.currentPlayer.getMark());
+    }
+
+    public void showOutcome(String mark) {
+        if(this.board.isATie()) {
+            this.display.announceTie();
+        } else if(this.board.playerHasWon(mark)) {
+            this.display.announceWinner(mark);
+        }
+    }
+
+    public void togglePlayer() {
+        if(this.currentPlayer == this.playerOne) {
+            this.currentPlayer = this.playerTwo;
+        } else {
+            this.currentPlayer = this.playerOne;
+        }
     }
 }
