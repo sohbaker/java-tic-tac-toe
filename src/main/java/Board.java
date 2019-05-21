@@ -29,7 +29,7 @@ public class Board {
             int[] singleCombination = ALL_WINNING_COMBINATIONS[i];
             for (int b = 0; b < singleCombination.length; b++) {
                 if (mark.equals(grid.get(singleCombination[b]))) countOccurenceOfMark++;
-                if (countOccurenceOfMark.equals(3)) win = true;
+                if (countOccurenceOfMark == 3) win = true;
             }
             countOccurenceOfMark = 0;
         }
