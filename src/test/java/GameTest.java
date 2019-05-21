@@ -53,4 +53,15 @@ public class GameTest {
         game.play();
         assertThat(outputContent.toString(), containsString("Player X wins!"));
     }
+
+    @Test
+    public void knowsThatTheGameHasEndedBecauseOWins() throws IOException {
+        List<String> playerOneMoves = Arrays.asList("1", "3", "7");
+        List<String> playerTwoMoves = Arrays.asList("2", "5", "8");
+        player1 = new FakePlayer("X", display, playerOneMoves);
+        player2 = new FakePlayer("O", display, playerTwoMoves);
+        Game game = new Game(board, display, player1, player2);
+        game.play();
+        assertThat(outputContent.toString(), containsString("Player O wins!"));
+    }
 }
