@@ -38,7 +38,6 @@ public class DisplayTest {
     @Test
     public void printsTheGrid() {
         Board board = new Board();
-        int size = board.getSize();
         display.printGrid(board);
         assertThat(outputContent.toString(), containsString("1 | 2 | 3\n4 | 5 | 6\n7 | 8 | 9"));
     }
