@@ -6,34 +6,34 @@ import static org.junit.Assert.*;
 
 public class BoardTest {
     @Test
-    public void testNewBoardIsEmpty() {
+    public void newBoardIsEmpty() {
         Board board = new Board();
         assertTrue(board.isEmpty());
     }
 
     @Test
-    public void testAddAMarkToBoard() {
+    public void addAMarkToBoard() {
         Board board = new Board();
         board.markBoard(1, "X");
         assertEquals("X", board.getCellAtPosition(1));
     }
 
     @Test
-    public void testKnowsThatAMoveIsValid() {
+    public void knowsThatAMoveIsValid() {
         Board board = new Board();
         board.markBoard(1, "X");
         assertTrue(board.isValidMove(2));
     }
 
     @Test
-    public void testKnowsThatAMoveIsNotValid() {
+    public void knowsThatAMoveIsNotValid() {
         Board board = new Board();
         board.markBoard(1, "X");
         assertFalse(board.isValidMove(1));
     }
 
     @Test
-    public void testKnowsThatAPlayerHasWon() {
+    public void knowsThatAPlayerHasWon() {
         Board board = new Board();
         board.markBoard(1, "X");
         board.markBoard(2, "X");
@@ -42,7 +42,7 @@ public class BoardTest {
     }
 
     @Test
-    public void testKnowsThatThePlayerHasNotWon() {
+    public void knowsThatThePlayerHasNotWon() {
         Board board = new Board();
         board.markBoard(1, "X");
         board.markBoard(2, "X");
@@ -50,7 +50,7 @@ public class BoardTest {
     }
 
     @Test
-    public void testKnowsThatTheBoardIsFull() {
+    public void knowsThatTheBoardIsFull() {
         Board board = new Board();
         board.markBoard(1, "X");
         board.markBoard(2, "X");
@@ -65,7 +65,7 @@ public class BoardTest {
     }
 
     @Test
-    public void testKnowsThatTheBoardIsNotFull() {
+    public void knowsThatTheBoardIsNotFull() {
         Board board = new Board();
         board.markBoard(1, "X");
         board.markBoard(2, "X");
@@ -73,7 +73,7 @@ public class BoardTest {
     }
 
     @Test
-    public void testKnowsWhatCellsAreStillAvailable() {
+    public void knowsWhatCellsAreStillAvailable() {
         Board board = new Board();
         board.markBoard(1, "X");
         List availableMoves = board.availableMoves();
