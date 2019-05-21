@@ -21,7 +21,7 @@ public class BoardTest {
     @Test
     public void addAMarkToBoard() {
         board.markBoard(1, "X");
-        assertEquals("X", board.getCellAtPosition(1));
+        assertFalse(board.availableMoves().contains(1));
     }
 
     @Test
@@ -79,17 +79,6 @@ public class BoardTest {
         board.markBoard(1, "X");
         List availableMoves = board.availableMoves();
         assertFalse(availableMoves.isEmpty());
-    }
-
-    @Test
-    public void testReturnsTheMarkAtARequestedPosition() {
-        board.markBoard(1, "X");
-        assertEquals("X", board.getCellAtPosition(1));
-    }
-
-    @Test
-    public void testReturnsTheEmptyCellAtARequestedPosition() {
-        assertEquals("1", board.getCellAtPosition(1));
     }
 
     @Test

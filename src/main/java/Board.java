@@ -5,7 +5,7 @@ import java.util.List;
 public class Board {
     private final List grid = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
 
-    private static final int[][] ALL_WINNING_COMBINATIONS = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {2, 4, 6}, {0, 4, 8}};
+    private static final int[][] WINNING_COMBINATIONS = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {2, 4, 6}, {0, 4, 8}};
 
     private static final String[] PLAYER_MARKS = {"X", "O"};
 
@@ -23,17 +23,18 @@ public class Board {
     }
 
     public boolean playerHasWon(String mark) {
-        boolean win = false;
-        int countOccurenceOfMark = 0;
-        for (int i = 0; i < ALL_WINNING_COMBINATIONS.length; i++) {
-            int[] singleCombination = ALL_WINNING_COMBINATIONS[i];
-            for (int b = 0; b < singleCombination.length; b++) {
-                if (mark.equals(grid.get(singleCombination[b]))) countOccurenceOfMark++;
-                if (countOccurenceOfMark == 3) win = true;
-            }
-            countOccurenceOfMark = 0;
+        return playerHasPlacedThreeConnectingMarks(mark);
+    }
+
+    private boolean playerHasPlacedThreeConnectingMarks(String mark) {
+        boolean threeConnectingMarks = false;
+        for (int i = 0; i < WINNING_COMBINATIONS.length; i++) {
+            int[] singleCombination = WINNING_COMBINATIONS[i];
+            threeConnectingMarks = Arrays.stream(singleCombination)
+                        .allMatch(x -> getCellAtPosition(x).equals(mark));
+            if (threeConnectingMarks) { break; }
         }
-        return win;
+        return threeConnectingMarks;
     }
 
     public boolean isFull() {
@@ -48,8 +49,8 @@ public class Board {
         return availableCells;
     }
 
-    public String getCellAtPosition(int i) {
-        return grid.get(i - 1).toString();
+    private String getCellAtPosition(int i) {
+        return grid.get(i).toString();
     }
 
     public String getOpponentMark(String mark) {
@@ -74,9 +75,9 @@ public class Board {
 
     public List gridCells() {
        List<String> gridCells = new ArrayList<>();
-        int count = 1;
+        int count = 0;
 
-        while (count <= grid.size()) {
+        while (count < grid.size()) {
             String cell = getCellAtPosition(count);
             gridCells.add(cell);
             count++;
