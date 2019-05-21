@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 class Human implements Player {
     private String mark;
     private Display display;
@@ -13,7 +11,7 @@ class Human implements Player {
         return this.mark;
     }
 
-    public int getMove() throws IOException{
+    public int getMove() {
         String move = display.getInput();
         return Integer.parseInt(move);
     }
