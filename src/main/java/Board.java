@@ -75,12 +75,9 @@ public class Board {
 
     public List gridCells() {
        List<String> gridCells = new ArrayList<>();
-        int count = 0;
 
-        while (count < grid.size()) {
-            String cell = getCellAtPosition(count);
-            gridCells.add(cell);
-            count++;
+        for (int i = 0; i < grid.size(); i++) {
+            gridCells.add(getCellAtPosition(i));
         }
         return gridCells;
     }

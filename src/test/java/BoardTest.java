@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -84,5 +85,11 @@ public class BoardTest {
     @Test
     public void returnsTheOpponentsMark() {
         assertEquals("O", board.getOpponentMark("X"));
+    }
+
+    @Test
+    public void returnsTheCellsAsAList() {
+        List<String> expected = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
+        assertEquals(expected, board.gridCells());
     }
 }
