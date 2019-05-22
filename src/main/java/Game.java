@@ -5,7 +5,7 @@ public class Game {
     private Player currentPlayer;
     private Board board;
 
-    Game(Board currentBoard, Display currentDisplay, Player player1, Player player2) {
+    public Game(Board currentBoard, Display currentDisplay, Player player1, Player player2) {
         this.board = currentBoard;
         this.display = currentDisplay;
         this.currentPlayer = player1;

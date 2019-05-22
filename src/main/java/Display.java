@@ -6,7 +6,7 @@ public class Display {
     PrintStream console;
     InputStream input;
 
-    Display(PrintStream console, InputStream input) {
+    public Display(PrintStream console, InputStream input) {
         this.console = console;
         this.input = input;
     }

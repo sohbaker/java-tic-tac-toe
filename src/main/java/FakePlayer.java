@@ -6,7 +6,7 @@ class FakePlayer implements Player {
     private LinkedList<String> newMoves = new LinkedList<String>();
     private List<String> moves;
 
-    FakePlayer(String mark, Display display, List<String> moves) {
+    public FakePlayer(String mark, Display display, List<String> moves) {
         this.mark = mark;
         this.display = display;
         this.moves = moves;
