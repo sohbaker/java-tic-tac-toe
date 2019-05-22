@@ -3,13 +3,19 @@ import java.util.List;
 
 public class Display {
     String userInput;
+    PrintStream console;
+    InputStream input;
 
+    Display(PrintStream console, InputStream input) {
+        this.console = console;
+        this.input = input;
+    }
     public void printGreeting() {
-        System.out.println("Welcome to TicTacToe!");
+        console.println("Welcome to TicTacToe!");
     }
 
     public void promptPlayer(String playerMark) {
-        System.out.println(String.format("Make a move: %s", playerMark));
+        console.println(String.format("Make a move: %s", playerMark));
     }
 
     public void printGrid(Board board) {
@@ -21,27 +27,27 @@ public class Display {
 
         String wholeGrid = row1 + row2 +row3;
 
-        System.out.println(wholeGrid);
+        console.println(wholeGrid);
     }
 
     public void announceWinner(String playerMark) {
-        System.out.println(String.format("Player %s wins!", playerMark));
+        console.println(String.format("Player %s wins!", playerMark));
     }
 
     public void announceTie() {
-        System.out.println("It\'s a tie!");
+        console.println("It\'s a tie!");
     }
 
     public void notifyInvalid(String prompt) {
-        System.out.println(String.format("Invalid %s", prompt));
+        console.println(String.format("Invalid %s", prompt));
     }
 
     public String getInput() {
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
             this.userInput = reader.readLine();
         } catch (IOException e) {
-            System.out.println("Trouble reading input: " + e);
+            console.println("Trouble reading input: " + e);
         }
         return this.userInput;
     }
