@@ -1,28 +1,20 @@
-import org.junit.*;
-import java.io.*;
-import java.util.*;
+import org.junit.Test;
 
-import static junit.framework.TestCase.assertFalse;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertFalse;
 
 public class GameTest {
     private Board board = new Board();
-    private Display display = new Display();
+    private final ByteArrayOutputStream outputContent = new ByteArrayOutputStream();
+    private Display display = new Display(new PrintStream(outputContent), System.in);
     private Player player1;
     private Player player2;
-    private ByteArrayOutputStream outputContent = new ByteArrayOutputStream();
-    private final PrintStream defaultOut = System.out;
-
-    @Before
-    public void setUp() {
-        System.setOut(new PrintStream(outputContent));
-    }
-
-    @After
-    public void tearDownAndRevertStream() {
-        System.setOut(defaultOut);
-    }
 
     @Test
     public void knowsThatTheGameCanContinue() {
@@ -33,7 +25,7 @@ public class GameTest {
     }
 
     @Test
-    public void knowsThatTheGameHasEndedWithATie() throws IOException {
+    public void knowsThatTheGameHasEndedWithATie() {
         List<String> playerOneMoves = Arrays.asList("9", "1", "4", "3", "8");
         List<String> playerTwoMoves = Arrays.asList("5", "6", "7", "2");
         player1 = new FakePlayer("X", display, playerOneMoves);
@@ -44,7 +36,7 @@ public class GameTest {
     }
 
     @Test
-    public void knowsThatTheGameHasEndedBecauseXWins() throws IOException {
+    public void knowsThatTheGameHasEndedBecauseXWins() {
         List<String> playerOneMoves = Arrays.asList("1", "4", "7");
         List<String> playerTwoMoves = Arrays.asList("2", "3");
         player1 = new FakePlayer("X", display, playerOneMoves);
@@ -55,7 +47,7 @@ public class GameTest {
     }
 
     @Test
-    public void knowsThatTheGameHasEndedBecauseOWins() throws IOException {
+    public void knowsThatTheGameHasEndedBecauseOWins() {
         List<String> playerOneMoves = Arrays.asList("1", "3", "7");
         List<String> playerTwoMoves = Arrays.asList("2", "5", "8");
         player1 = new FakePlayer("X", display, playerOneMoves);

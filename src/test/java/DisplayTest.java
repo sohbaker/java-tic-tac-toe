@@ -1,4 +1,6 @@
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.io.*;
 
 import static junit.framework.TestCase.assertEquals;
@@ -7,20 +9,12 @@ import static org.junit.Assert.assertThat;
 
 public class DisplayTest {
     private final ByteArrayOutputStream outputContent = new ByteArrayOutputStream();
-    private final PrintStream defaultOut = System.out;
-    private final InputStream defaultIn = System.in;
+    private final InputStream inputContent = new ByteArrayInputStream(("").getBytes());
     private Display display;
 
     @Before
     public void setUpStreams() {
-        display = new Display();
-        System.setOut(new PrintStream(outputContent));
-    }
-
-    @After
-    public void revertStreams() {
-        System.setOut(defaultOut);
-        System.setIn(defaultIn);
+        display = new Display(new PrintStream(outputContent), inputContent);
     }
 
     @Test
@@ -38,7 +32,6 @@ public class DisplayTest {
     @Test
     public void printsTheGrid() {
         Board board = new Board();
-        int size = board.getSize();
         display.printGrid(board);
         assertThat(outputContent.toString(), containsString("1 | 2 | 3\n4 | 5 | 6\n7 | 8 | 9"));
     }
@@ -62,10 +55,10 @@ public class DisplayTest {
     }
 
     @Test
-    public void receivesAnInputFromAUser() throws IOException {
+    public void receivesAnInputFromAUser() {
         String sample = "sample text";
-        InputStream stream = new ByteArrayInputStream((sample+"\n").getBytes());
-        System.setIn(stream);
+        InputStream fakeInput = new ByteArrayInputStream((sample+"\n").getBytes());
+        display = new Display(new PrintStream(outputContent), fakeInput);
         assertEquals(sample, display.getInput());
     }
   }

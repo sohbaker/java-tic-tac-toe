@@ -1,64 +1,37 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Board {
-    public final List grid = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    private final List grid = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    private static final int[][] WINNING_LINES = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {2, 4, 6}, {0, 4, 8}};
+    private static final String[] PLAYER_MARKS = {"X", "O"};
 
-    public static final int[][] ALL_WINNING_COMBINATIONS = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {2, 4, 6}, {0, 4, 8}};
+    public boolean isEmpty() {
+        return !grid.contains(PLAYER_MARKS[0]) && !grid.contains(PLAYER_MARKS[1]);
+    }
 
-    public static final String[] PLAYER_MARKS = {"X", "O"};
-
-    public Boolean isEmpty() {
-        return !grid.contains("X") && !grid.contains("O");
+    public boolean isFull() {
+        return availableMoves().isEmpty();
     }
 
     public void markBoard(int position, String mark) {
-       grid.set(position - 1, mark);
+        grid.set(position - 1, mark);
     }
 
-    public String getMarkAtPosition(int position) {
+    public boolean isValidMove(int position) {
         int index = position - 1;
-        return grid.get(index).toString();
+        return grid.get(index) != PLAYER_MARKS[0] && grid.get(index) != PLAYER_MARKS[1];
     }
 
-    public Boolean isValidMove(int position) {
-        int index = position - 1;
-        return grid.get(index) != "X" && grid.get(index) != "O";
-    }
-
-    public Boolean playerHasWon(String mark) {
-        boolean win = false;
-        Integer countOccurenceOfMark = 0;
-        for (int i = 0; i < ALL_WINNING_COMBINATIONS.length; i++) {
-            int[] singleCombination = ALL_WINNING_COMBINATIONS[i];
-            for (int b = 0; b < singleCombination.length; b++) {
-                if (mark.equals(grid.get(singleCombination[b]))) countOccurenceOfMark++;
-                if (countOccurenceOfMark.equals(3)) win = true;
-            }
-            countOccurenceOfMark = 0;
-        }
-        return win;
-    }
-
-    public Boolean isFull() {
-        return availableMoves().isEmpty();
+    public boolean playerHasWon(String mark) {
+        return playerHasWinningLine(mark);
     }
 
     public List availableMoves() {
         List<Integer> availableCells = new ArrayList<>();
         for (int i = 0; i < grid.size(); i++) {
-            if (grid.get(i) != "X" && grid.get(i) != "O") availableCells.add(i + 1);
+            if (grid.get(i) != PLAYER_MARKS[0] && grid.get(i) != PLAYER_MARKS[1]) availableCells.add(i + 1);
         }
         return availableCells;
-    }
-
-    public String getCellAtPosition(int i) {
-        return grid.get(i - 1).toString();
-    }
-
-    public int getSize() {
-        return grid.size();
     }
 
     public String getOpponentMark(String mark) {
@@ -66,7 +39,7 @@ public class Board {
 
         for (int i = 0; i < PLAYER_MARKS.length; i++) {
             if(PLAYER_MARKS[i] != mark) {
-              opponent = PLAYER_MARKS[i];
+                opponent = PLAYER_MARKS[i];
             }
         }
         return opponent;
@@ -82,15 +55,24 @@ public class Board {
     }
 
     public List gridCells() {
-       List<String> gridCells = new ArrayList<>();
-        int gridSize = getSize();
-        int count = 1;
+        List<String> gridCells = new ArrayList<>();
 
-        while (count <= gridSize) {
-            String cell = getCellAtPosition(count);
-            gridCells.add(cell);
-            count++;
+        for (int i = 0; i < grid.size(); i++) {
+            gridCells.add(getCellAtPosition(i));
         }
         return gridCells;
+    }
+
+    private String getCellAtPosition(int i) {
+        return grid.get(i).toString();
+    }
+
+    private boolean playerHasWinningLine(String mark) {
+        for (int[] singleLine : WINNING_LINES) {
+            if (Arrays.stream(singleLine).allMatch(x -> getCellAtPosition(x).equals(mark))) {
+                return true;
+            }
+        }
+        return false;
     }
 }
