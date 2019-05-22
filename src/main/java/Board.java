@@ -68,13 +68,11 @@ public class Board {
     }
 
     private boolean playerHasWinningLine(String mark) {
-        boolean win = false;
-        for (int i = 0; i < WINNING_LINES.length; i++) {
-            int[] singleLine = WINNING_LINES[i];
-            win = Arrays.stream(singleLine)
-                    .allMatch(x -> getCellAtPosition(x).equals(mark));
-            if (win) { break; }
+        for (int[] singleLine : WINNING_LINES) {
+            if (Arrays.stream(singleLine).allMatch(x -> getCellAtPosition(x).equals(mark))) {
+                return true;
+            }
         }
-        return win;
+        return false;
     }
 }
