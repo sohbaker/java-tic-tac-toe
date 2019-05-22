@@ -1,25 +1,29 @@
+import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 public class GameTest {
     private Board board = new Board();
-    private final ByteArrayOutputStream outputContent = new ByteArrayOutputStream();
-    private Display display = new Display(new PrintStream(outputContent), System.in);
+    private DisplaySpy display;
     private Player player1;
     private Player player2;
 
+    @Before
+    public void setUp()  {
+        display = new DisplaySpy(System.out, System.in);
+    }
+
     @Test
     public void knowsThatTheGameCanContinue() {
-        player1 = new Human("X", display);
-        player2 = new Human("O", display);
+        List<String> playerOneMoves = Arrays.asList("9");
+        List<String> playerTwoMoves = Arrays.asList("5");
+        player1 = new FakePlayer("X", display, playerOneMoves);
+        player2 = new FakePlayer("O", display, playerTwoMoves);
         Game game = new Game(board, display, player1, player2);
         assertFalse(game.isOver());
     }
@@ -32,7 +36,7 @@ public class GameTest {
         player2 = new FakePlayer("O", display, playerTwoMoves);
         Game game = new Game(board, display, player1, player2);
         game.play();
-        assertThat(outputContent.toString(), containsString("It\'s a tie!"));
+        assertTrue(display.announceTieShouldHaveBeenCalled());
     }
 
     @Test
@@ -43,7 +47,7 @@ public class GameTest {
         player2 = new FakePlayer("O", display, playerTwoMoves);
         Game game = new Game(board, display, player1, player2);
         game.play();
-        assertThat(outputContent.toString(), containsString("Player X wins!"));
+        assertTrue(display.announceWinnerShouldHaveBeenCalled());
     }
 
     @Test
@@ -54,6 +58,6 @@ public class GameTest {
         player2 = new FakePlayer("O", display, playerTwoMoves);
         Game game = new Game(board, display, player1, player2);
         game.play();
-        assertThat(outputContent.toString(), containsString("Player O wins!"));
+        assertTrue(display.announceWinnerShouldHaveBeenCalled());
     }
 }
