@@ -5,7 +5,7 @@ import java.util.List;
 public class Board {
     private final List grid = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
 
-    private static final int[][] WINNING_COMBINATIONS = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {2, 4, 6}, {0, 4, 8}};
+    private static final int[][] WINNING_LINES = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {2, 4, 6}, {0, 4, 8}};
 
     private static final String[] PLAYER_MARKS = {"X", "O"};
 
@@ -23,18 +23,18 @@ public class Board {
     }
 
     public boolean playerHasWon(String mark) {
-        return playerHasPlacedThreeConnectingMarks(mark);
+        return playerHasWinningLine(mark);
     }
 
-    private boolean playerHasPlacedThreeConnectingMarks(String mark) {
-        boolean threeConnectingMarks = false;
-        for (int i = 0; i < WINNING_COMBINATIONS.length; i++) {
-            int[] singleCombination = WINNING_COMBINATIONS[i];
-            threeConnectingMarks = Arrays.stream(singleCombination)
+    private boolean playerHasWinningLine(String mark) {
+        boolean win = false;
+        for (int i = 0; i < WINNING_LINES.length; i++) {
+            int[] singleLine = WINNING_LINES[i];
+            win = Arrays.stream(singleLine)
                         .allMatch(x -> getCellAtPosition(x).equals(mark));
-            if (threeConnectingMarks) { break; }
+            if (win) { break; }
         }
-        return threeConnectingMarks;
+        return win;
     }
 
     public boolean isFull() {
