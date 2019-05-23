@@ -6,8 +6,8 @@ import static org.junit.Assert.assertFalse;
 public class GameTest {
     private Board board = new Board();
     private DisplaySpy display;
-    private Player player1;
-    private Player player2;
+    private FakePlayer player1;
+    private FakePlayer player2;
 
     @Before
     public void setUp()  {
