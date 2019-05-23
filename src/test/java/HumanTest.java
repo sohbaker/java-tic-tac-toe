@@ -1,4 +1,3 @@
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -10,13 +9,9 @@ public class HumanTest {
     private Human human;
     private Display display = new Display(System.out, System.in);
 
-    @Before
-    public void setUp() {
-        human = new Human("X", display);
-    }
-
     @Test
     public void hasAMark() {
+        human = new Human("X", display);
         assertEquals("X", human.getMark());
     }
 
