@@ -1,8 +1,5 @@
-import org.junit.Before;
-import org.junit.Test;
-
+import org.junit.*;
 import java.io.*;
-
 import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
@@ -61,4 +58,4 @@ public class DisplayTest {
         display = new Display(new PrintStream(outputContent), fakeInput);
         assertEquals(sample, display.getInput());
     }
-  }
+}

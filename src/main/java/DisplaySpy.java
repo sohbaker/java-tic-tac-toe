@@ -1,5 +1,4 @@
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.*;
 
 class DisplaySpy extends Display {
     private boolean win = false;
