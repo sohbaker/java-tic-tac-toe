@@ -1,8 +1,7 @@
 import org.junit.*;
 import java.io.*;
-import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class DisplayTest {
     private final ByteArrayOutputStream outputContent = new ByteArrayOutputStream();

@@ -1,7 +1,6 @@
 import org.junit.*;
 import java.util.*;
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class GameTest {
     private Board board = new Board();
