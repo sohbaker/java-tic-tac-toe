@@ -11,5 +11,6 @@ build/*
 # Ignore DS_Store
 .DS_Store
 
-# Ignore artifacts
+# Ignore artifacts and MANIFEST
 out/
+src/META-INF
