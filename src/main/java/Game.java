@@ -27,12 +27,28 @@ public class Game {
             display.printGrid(board);
             display.promptPlayer(currentPlayer.getMark());
             int move = this.currentPlayer.getMove();
-            this.board.markBoard(move, this.currentPlayer.getMark());
+            validateMove(move);
             if(!this.board.playerHasWon(this.currentPlayer.getMark())) {
                 togglePlayer();
             }
         }
         showOutcome(this.currentPlayer.getMark());
+    }
+
+    private boolean validateMove(int move) {
+        if (board.isValidMove(move)) {
+            this.board.markBoard(move, this.currentPlayer.getMark());
+            return true;
+        } else {
+            getNewMove();
+        }
+        return false;
+    }
+
+    private void getNewMove(){
+        display.notifyInvalid("move");
+        int newMove = this.currentPlayer.getMove();
+        validateMove(newMove);
     }
 
     private void showOutcome(String mark) {
