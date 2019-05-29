@@ -1,14 +1,14 @@
 import org.junit.Test;
 import java.io.*;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class HumanTest {
     private Human human;
-    private Display display = new Display(System.out, System.in);
+    private DisplaySpy displaySpy = new DisplaySpy(System.out, System.in);
 
     @Test
     public void hasAMark() {
-        human = new Human("X", display);
+        human = new Human("X", displaySpy);
         assertEquals("X", human.getMark());
     }
 
@@ -16,8 +16,8 @@ public class HumanTest {
     public void getsAMoveFromAPlayer() {
         String sampleMove = "1";
         InputStream fakeInput = new ByteArrayInputStream((sampleMove + "\n").getBytes());
-        display = new Display(System.out, fakeInput);
-        human = new Human("O", display);
+        displaySpy = new DisplaySpy(System.out, fakeInput);
+        human = new Human("O", displaySpy);
         assertEquals(1, human.getMove());
     }
 }
