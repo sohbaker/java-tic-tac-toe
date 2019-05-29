@@ -55,4 +55,15 @@ public class GameTest {
         game.play();
         assertTrue(display.announceWinnerShouldHaveBeenCalled());
     }
+
+    @Test
+    public void willNotLetAPlayerSelectAMoveThatIsTaken() {
+        List<String> playerOneMoves = Arrays.asList("1", "2", "3", "7");
+        List<String> playerTwoMoves = Arrays.asList("2", "5", "8");
+        player1 = new FakePlayer("X", display, playerOneMoves);
+        player2 = new FakePlayer("O", display, playerTwoMoves);
+        Game game = new Game(board, display, player1, player2);
+        game.play();
+        assertTrue(display.notifyInvalidShouldHaveBeenCalled());
+    }
 }

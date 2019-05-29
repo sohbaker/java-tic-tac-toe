@@ -3,9 +3,10 @@ import java.io.*;
 public class DisplaySpy extends Display {
     private boolean win = false;
     private boolean tie = false;
+    private boolean invalid = false;
 
-    public DisplaySpy(PrintStream console, InputStream input) {
-        super(console, input);
+    public DisplaySpy(PrintStream output, InputStream input) {
+        super(output, input);
     }
 
     @Override
@@ -14,6 +15,11 @@ public class DisplaySpy extends Display {
 
     @Override
     public void promptPlayer(String mark) {
+    }
+
+    @Override
+    public void notifyInvalid(String prompt) {
+        this.invalid = true;
     }
 
     @Override
@@ -30,7 +36,12 @@ public class DisplaySpy extends Display {
         return win;
     }
 
-    public boolean announceTieShouldHaveBeenCalled() {
+    public boolean announceTieShouldHaveBeenCalled()
+    {
         return tie;
+    }
+
+    public boolean notifyInvalidShouldHaveBeenCalled() {
+        return invalid;
     }
 }
