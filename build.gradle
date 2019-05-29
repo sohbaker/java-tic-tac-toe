@@ -1,24 +1,38 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
-group 'java-tic-tac-toe'
-version '1.0-SNAPSHOT'
+group 'TicTacToe'
+version '1.0'
 
 sourceCompatibility = 1.8
 
+application {
+    mainClassName = 'Run'
+}
+
 repositories {
     mavenCentral()
+    flatDir {
+        dir 'out/artifacts/TicTacToe_jar'
+    }
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile ':TicTacToe'
 }
 
-allprojects {
-    gradle.projectsEvaluated {
-        tasks.withType(JavaCompile) {
-            options.compilerArgs << "-Xlint:deprecation"
-        }
-    }
+jar {
+   manifest {
+       attributes (
+               'Main-Class': 'Run'
+       )
+   }
 }
+
+run {
+    standardInput = System.in
+}
+
