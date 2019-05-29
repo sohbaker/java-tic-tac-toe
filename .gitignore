@@ -10,6 +10,8 @@ build/*
 
 # Ignore DS_Store
 .DS_Store
+src/.DS_Store
+src/test/.DS_Store
 
 # Ignore artifacts and MANIFEST
 out/
