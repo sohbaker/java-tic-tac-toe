@@ -10,3 +10,6 @@ build/*
 
 # Ignore DS_Store
 .DS_Store
+
+# Ignore artifacts
+out/
