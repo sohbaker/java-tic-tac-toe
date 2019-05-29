@@ -3,6 +3,16 @@
 
 # Ignore Gradle build output directory
 /build/
+build/*
 
 # Ignore idea files
 .idea/
+
+# Ignore DS_Store
+.DS_Store
+src/.DS_Store
+src/test/.DS_Store
+
+# Ignore artifacts and MANIFEST
+out/
+src/META-INF

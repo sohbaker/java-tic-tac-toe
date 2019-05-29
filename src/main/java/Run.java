@@ -1,4 +1,4 @@
-public class TicTacToe {
+public class Run {
     public static void main(String[] args) {
         Board board = new Board();
         Display display = new Display(System.out, System.in);

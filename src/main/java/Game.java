@@ -5,7 +5,7 @@ public class Game {
     private Player currentPlayer;
     private Board board;
 
-    Game(Board currentBoard, Display currentDisplay, Player player1, Player player2) {
+    public Game(Board currentBoard, Display currentDisplay, Player player1, Player player2) {
         this.board = currentBoard;
         this.display = currentDisplay;
         this.currentPlayer = player1;
@@ -36,7 +36,7 @@ public class Game {
     }
 
     private void showOutcome(String mark) {
-        if(this.board.isATie()) {
+        if (this.board.isATie()) {
             this.display.announceTie();
         } else if(this.board.playerHasWon(mark)) {
             this.display.announceWinner(mark);
@@ -44,7 +44,7 @@ public class Game {
     }
 
     private void togglePlayer() {
-        if(this.currentPlayer == this.playerOne) {
+        if (this.currentPlayer == this.playerOne) {
             this.currentPlayer = this.playerTwo;
         } else {
             this.currentPlayer = this.playerOne;

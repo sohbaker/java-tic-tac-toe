@@ -1,8 +1,8 @@
-class Human implements Player {
+public class Human implements Player {
     private String mark;
     private Display display;
 
-    Human(String mark, Display display) {
+    public Human(String mark, Display display) {
         this.mark = mark;
         this.display = display;
     }

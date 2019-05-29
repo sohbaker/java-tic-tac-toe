@@ -1,11 +1,10 @@
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.*;
 
-class DisplaySpy extends Display {
+public class DisplaySpy extends Display {
     private boolean win = false;
     private boolean tie = false;
 
-    DisplaySpy(PrintStream console, InputStream input) {
+    public DisplaySpy(PrintStream console, InputStream input) {
         super(console, input);
     }
 

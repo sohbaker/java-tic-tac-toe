@@ -1,17 +1,12 @@
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertFalse;
+import org.junit.*;
+import java.util.*;
+import static org.junit.Assert.*;
 
 public class GameTest {
     private Board board = new Board();
     private DisplaySpy display;
-    private Player player1;
-    private Player player2;
+    private FakePlayer player1;
+    private FakePlayer player2;
 
     @Before
     public void setUp()  {
