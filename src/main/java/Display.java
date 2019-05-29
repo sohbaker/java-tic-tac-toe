@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.List;
 
 public class Display {
-    String userInput;
+    String userInput = "";
     PrintStream output;
     InputStream input;
 
@@ -11,7 +11,7 @@ public class Display {
         this.input = input;
     }
     public void printGreeting() {
-        output.println("Welcome to TicTacToe!");
+        output.println("Welcome to Tic Tac Toe!");
     }
 
     public void promptPlayer(String playerMark) {

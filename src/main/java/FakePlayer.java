@@ -1,6 +1,6 @@
 import java.util.*;
 
-class FakePlayer implements Player {
+public class FakePlayer implements Player {
     private String mark;
     private Display display;
     private LinkedList<String> newMoves = new LinkedList<String>();

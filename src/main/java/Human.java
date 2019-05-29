@@ -1,4 +1,4 @@
-class Human implements Player {
+public class Human implements Player {
     private String mark;
     private Display display;
 

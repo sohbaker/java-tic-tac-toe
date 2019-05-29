@@ -1,6 +1,6 @@
 import java.io.*;
 
-class DisplaySpy extends Display {
+public class DisplaySpy extends Display {
     private boolean win = false;
     private boolean tie = false;
 
