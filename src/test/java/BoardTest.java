@@ -4,10 +4,11 @@ import static org.junit.Assert.*;
 
 public class BoardTest {
     private Board board;
+    private String[] marks = {"X", "O"};
 
     @Before
     public void setUpBoard() {
-        board = new Board();
+        board = new Board(marks);
     }
 
     @Test
@@ -87,5 +88,12 @@ public class BoardTest {
     public void returnsTheCellsAsAList() {
         List<String> expected = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
         assertEquals(expected, board.gridCells());
+    }
+
+    @Test
+    public void storesChosenPlayerMarks() {
+        String[] testMarks = { "Y", "N"};
+        board = new Board(testMarks);
+        assertEquals(board.getOpponentMark("N"), "Y");
     }
 }

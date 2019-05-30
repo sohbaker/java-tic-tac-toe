@@ -3,7 +3,12 @@ import java.util.*;
 public class Board {
     private final List grid = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
     private static final int[][] WINNING_LINES = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {2, 4, 6}, {0, 4, 8}};
-    private static final String[] PLAYER_MARKS = {"X", "O"};
+    private String[] PLAYER_MARKS = new String[2];
+
+    public Board(String[] marks){
+        this.PLAYER_MARKS[0] = marks[0];
+        this.PLAYER_MARKS[1] = marks[1];
+    }
 
     public boolean isEmpty() {
         return !grid.contains(PLAYER_MARKS[0]) && !grid.contains(PLAYER_MARKS[1]);

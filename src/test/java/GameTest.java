@@ -3,7 +3,8 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class GameTest {
-    private Board board = new Board();
+    private String[] marks = {"X", "O"};
+    private Board board = new Board(marks);
     private DisplaySpy display;
     private FakePlayer player1;
     private FakePlayer player2;
