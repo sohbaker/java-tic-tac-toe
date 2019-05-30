@@ -51,4 +51,8 @@ public class Display {
         }
         return this.userInput;
     }
+
+    public void promptForMark(String prompt) {
+        output.println(String.format("%s, please choose your mark for the game:", prompt));
+    }
 }

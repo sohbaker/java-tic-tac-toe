@@ -27,7 +27,8 @@ public class DisplayTest {
 
     @Test
     public void printsTheGrid() {
-        Board board = new Board();
+        String[] marks = {"X", "O"};
+        Board board = new Board(marks);
         display.printGrid(board);
         assertThat(outputContent.toString(), containsString("1 | 2 | 3\n4 | 5 | 6\n7 | 8 | 9"));
     }
@@ -56,5 +57,11 @@ public class DisplayTest {
         InputStream fakeInput = new ByteArrayInputStream((sample+"\n").getBytes());
         display = new Display(new PrintStream(outputContent), fakeInput);
         assertEquals(sample, display.getInput());
+    }
+
+    @Test
+    public void promptsPlayerToSelectAMark() {
+        display.promptForMark("Player 1");
+        assertThat(outputContent.toString(), containsString("Player 1, please choose your mark for the game:"));
     }
 }
