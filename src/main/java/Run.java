@@ -4,7 +4,7 @@ public class Run {
 
     public static void main(String[] args) {
         display.printGreeting();
-         String gameType = getGameType();
+        String gameType = getGameType();
         String[] chosenMarks = getPlayersToChooseMarks();
         setUpGame(gameType, chosenMarks);
         game.play();
@@ -13,7 +13,7 @@ public class Run {
     private static String getGameType() {
         display.askforGameType();
         String gameType = display.getInput();
-        if(gameType.equalsIgnoreCase("hh")) {
+        if (gameType.equalsIgnoreCase("hh")) {
             return gameType;
         } else {
             display.print("Coming soon!");
@@ -29,7 +29,7 @@ public class Run {
         display.promptForMark("Player 2");
         marks[1] = display.getInput();
 
-        for(String mark : marks) {
+        for (String mark : marks) {
             mark = mark.replaceAll("\\s", "");
         }
         return marks;
