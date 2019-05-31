@@ -55,4 +55,12 @@ public class Display {
     public void promptForMark(String prompt) {
         output.println(String.format("%s, please choose your mark for the game:", prompt));
     }
+
+    public void print(String message) {
+        output.println(message);
+    }
+
+    public void askforGameType() {
+        output.println("Type hh to play Human vs Human, or hc to play Human vs Computer");
+    }
 }
