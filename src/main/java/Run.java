@@ -4,9 +4,22 @@ public class Run {
 
     public static void main(String[] args) {
         display.printGreeting();
+         String gameType = getGameType();
         String[] chosenMarks = getPlayersToChooseMarks();
-        setUpGame(chosenMarks);
+        setUpGame(gameType, chosenMarks);
         game.play();
+    }
+
+    private static String getGameType() {
+        display.askforGameType();
+        String gameType = display.getInput();
+        if(gameType.equalsIgnoreCase("hh")) {
+            return gameType;
+        } else {
+            display.print("Coming soon!");
+            System.exit(0);
+        }
+        return "";
     }
 
     private static String[] getPlayersToChooseMarks() {
@@ -22,11 +35,13 @@ public class Run {
         return marks;
     }
 
-    private static void setUpGame(String[] marks) {
+    private static void setUpGame(String gameType, String[] marks) {
+        PlayersFactory playerFactory = new PlayersFactory();
+        Players getPlayers = playerFactory.getPlayers(gameType);
+        Player[] players = getPlayers.createPlayers(marks[0], marks[1], display);
+
         Board board = new Board(marks);
-        Player playerOne = new Human(marks[0],display);
-        Player playerTwo = new Human(marks[1], display);
-        game = new Game(board, display, playerOne, playerTwo);
+        game = new Game(board, display, players[0], players[1]);
     }
 }
 
