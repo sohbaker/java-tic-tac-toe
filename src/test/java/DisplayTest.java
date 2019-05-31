@@ -64,4 +64,16 @@ public class DisplayTest {
         display.promptForMark("Player 1");
         assertThat(outputContent.toString(), containsString("Player 1, please choose your mark for the game:"));
     }
+
+    @Test
+    public void printsAGivenMessage() {
+        display.print("foobar");
+        assertThat(outputContent.toString(), containsString("foobar"));
+    }
+
+    @Test
+    public void asksThePlayerForATypeOfGame() {
+        display.askforGameType();
+        assertThat(outputContent.toString(), containsString("Type hh to play Human vs Human, or hc to play Human vs Computer"));
+    }
 }
