@@ -1,5 +1,5 @@
-public class PlayerFactory {
-    public PlayerCreation getPlayers(String gameType) {
+public class PlayersFactory {
+    public Players getPlayers(String gameType) {
         if(gameType == null) {
             return null;
         }
