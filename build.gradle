@@ -21,11 +21,11 @@ dependencies {
 }
 
 jar {
-   manifest {
-       attributes (
-               'Main-Class': 'Run'
-       )
-   }
+    manifest {
+        attributes (
+                'Main-Class': 'Run'
+        )
+    }
 }
 
 run {
