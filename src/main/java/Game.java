@@ -75,11 +75,11 @@ public class Game implements Serializable {
     }
 
     private void saveGameState() {
-        String filename = "ttt_data.txt";
+        String filename = "saved_game.txt";
         try {
             FileOutputStream file = new FileOutputStream(filename);
             ObjectOutputStream out = new ObjectOutputStream(file);
-            out.writeObject(this.board.gridCells());
+            out.writeObject(this.board);
             out.writeObject(this.currentPlayer.getMark());
             out.writeObject(this.board.getOpponentMark(currentPlayer.getMark()));
             out.close();
