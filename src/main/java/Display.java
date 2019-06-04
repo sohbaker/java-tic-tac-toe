@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.List;
 
-public class Display {
+public class Display implements Serializable {
     String userInput = "";
     PrintStream output;
     InputStream input;
