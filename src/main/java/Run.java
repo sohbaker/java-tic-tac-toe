@@ -1,13 +1,41 @@
+import java.io.*;
+
 public class Run {
     private static Game game;
     private static Display display = new Display(System.out, System.in);
 
     public static void main(String[] args) {
         display.printGreeting();
+        if (args.length == 0) {
+            createNewGame();
+        } else {
+            reloadPreviousGame(args[0]);
+        }
+        game.play();
+    }
+
+    private static void createNewGame() {
         String gameType = getGameType();
         String[] chosenMarks = getPlayersToChooseMarks();
-        setUpGame(gameType, chosenMarks);
-        game.play();
+        setUpNewGame(gameType, chosenMarks);
+    }
+
+    private static void reloadPreviousGame(String args) {
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(args));
+            Board savedBoard = (Board) in.readObject();
+            String playerOneMark = (String) in.readObject();
+            String playerTwoMark = (String) in.readObject();
+
+            Human player1 = new Human(playerOneMark, display);
+            Human player2 = new Human(playerTwoMark, display);
+
+            game = new Game(savedBoard, display, player1, player2);
+        } catch (IOException ex) {
+            System.out.println(String.format("IO Exception %s", ex));
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Class not found");
+        }
     }
 
     private static String getGameType() {
@@ -35,7 +63,7 @@ public class Run {
         return marks;
     }
 
-    private static void setUpGame(String gameType, String[] marks) {
+    private static void setUpNewGame(String gameType, String[] marks) {
         PlayersFactory playerFactory = new PlayersFactory();
         Players getPlayers = playerFactory.getPlayers(gameType);
         Player[] players = getPlayers.createPlayers(marks[0], marks[1], display);
