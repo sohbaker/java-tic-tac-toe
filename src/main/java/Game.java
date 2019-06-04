@@ -81,7 +81,7 @@ public class Game implements Serializable {
             ObjectOutputStream out = new ObjectOutputStream(file);
             out.writeObject(this.board);
             out.writeObject(this.currentPlayer.getMark());
-            out.writeObject(this.board.getOpponentMark(currentPlayer.getMark()));
+            out.writeObject(this.board.getOpponentMark(this.currentPlayer.getMark()));
             out.close();
             file.close();
             System.out.println("Object serialized");
