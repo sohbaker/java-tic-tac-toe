@@ -39,7 +39,7 @@ public class Display {
     }
 
     public void notifyInvalid(String prompt) {
-        output.println(String.format("Invalid %s", prompt));
+        output.println(String.format("Invalid %s. Please try again", prompt));
     }
 
     public String getInput() {

@@ -48,7 +48,7 @@ public class DisplayTest {
     @Test
     public void notifyOfAnInvalidChoice() {
         display.notifyInvalid("move");
-        assertThat(outputContent.toString(), containsString("Invalid move"));
+        assertThat(outputContent.toString(), containsString("Invalid move. Please try again"));
     }
 
     @Test
