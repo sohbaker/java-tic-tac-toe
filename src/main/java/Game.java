@@ -1,4 +1,6 @@
-public class Game {
+import java.io.*;
+
+public class Game implements Serializable {
     private final Display display;
     private final Player playerOne;
     private final Player playerTwo;
@@ -73,7 +75,19 @@ public class Game {
     }
 
     private void saveGameState() {
-        display.print("saved");
+        String filename = "ttt_data.txt";
+        try {
+            FileOutputStream file = new FileOutputStream(filename);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(this.board.gridCells());
+            out.writeObject(this.currentPlayer.getMark());
+            out.writeObject(this.board.getOpponentMark(currentPlayer.getMark()));
+            out.close();
+            file.close();
+            System.out.println("Object serialized");
+        } catch (IOException ex) {
+            System.out.println(String.format("IOException caught %s", ex));
+        }
         System.exit(0);
     }
 }
