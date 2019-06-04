@@ -4,6 +4,7 @@ public class Game {
     private final Player playerTwo;
     private Player currentPlayer;
     private Board board;
+    private boolean stopGame = false;
 
     public Game(Board currentBoard, Display currentDisplay, Player player1, Player player2) {
         this.board = currentBoard;
@@ -23,7 +24,7 @@ public class Game {
     }
 
     public void play() {
-        while (!isOver()) {
+        while (!isOver() && !stopGame) {
             display.printGrid(board);
             display.promptPlayer(currentPlayer.getMark());
             int move = this.currentPlayer.getMove();
@@ -32,10 +33,14 @@ public class Game {
                 togglePlayer();
             }
         }
+        if (stopGame) {
+            saveGameState();
+        }
         showOutcome(this.currentPlayer.getMark());
     }
 
     private boolean validateMove(int move) {
+        if (move == -2) { saveGameState(); }
         if (board.isValidMove(move)) {
             this.board.markBoard(move, this.currentPlayer.getMark());
             return true;
@@ -65,5 +70,10 @@ public class Game {
         } else {
             this.currentPlayer = this.playerOne;
         }
+    }
+
+    private void saveGameState() {
+        display.print("saved");
+        System.exit(0);
     }
 }
