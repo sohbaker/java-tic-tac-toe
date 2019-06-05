@@ -6,6 +6,7 @@ public class Run {
 
     public static void main(String[] args) {
         display.printGreeting();
+        display.printInstructions();
         if (args.length == 0) {
             createNewGame();
         } else {
@@ -31,6 +32,8 @@ public class Run {
             Human player2 = new Human(playerTwoMark, display);
 
             game = new Game(savedBoard, display, player1, player2);
+            display.confirmSavedGameHasReloaded();
+
         } catch (IOException ex) {
             System.out.println(String.format("IO Exception %s", ex));
         } catch (ClassNotFoundException ex) {
@@ -39,12 +42,12 @@ public class Run {
     }
 
     private static String getGameType() {
-        display.askforGameType();
+        display.askForGameType();
         String gameType = display.getInput();
         if (gameType.equalsIgnoreCase("hh")) {
             return gameType;
         } else {
-            display.print("Coming soon!");
+            display.printMessage("Coming soon!");
             System.exit(0);
         }
         return "";
@@ -58,7 +61,7 @@ public class Run {
         marks[1] = display.getInput();
 
         for (String mark : marks) {
-            mark = mark.replaceAll("\\s", "");
+            mark.replaceAll("\\s", "");
         }
         return marks;
     }
