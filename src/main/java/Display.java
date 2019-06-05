@@ -67,5 +67,7 @@ public class Display implements Serializable {
         output.println(message);
     }
 
+    public void confirmGameIsSaved() { output.println("Your game has been saved!"); }
+
     public void confirmSavedGameHasReloaded() { output.println("Here's your saved game:"); }
 }
