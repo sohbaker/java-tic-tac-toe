@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.List;
 
-public class Display {
+public class Display implements Serializable {
     String userInput = "";
     PrintStream output;
     InputStream input;
@@ -10,12 +10,23 @@ public class Display {
         this.output = output;
         this.input = input;
     }
+
     public void printGreeting() {
         output.println("Welcome to Tic Tac Toe!");
     }
 
+    public void printInstructions() { output.println("At any point you can type 'exit' to leave the game and continue at a later time"); }
+
     public void promptPlayer(String playerMark) {
         output.println(String.format("Make a move: %s", playerMark));
+    }
+
+    public void askForGameType() {
+        output.println("Type hh to play Human vs Human, or hc to play Human vs Computer");
+    }
+
+    public void promptForMark(String prompt) {
+        output.println(String.format("%s, please choose your mark for the game:", prompt));
     }
 
     public void printGrid(Board board) {
@@ -30,18 +41,6 @@ public class Display {
         output.println(wholeGrid);
     }
 
-    public void announceWinner(String playerMark) {
-        output.println(String.format("Player %s wins!", playerMark));
-    }
-
-    public void announceTie() {
-        output.println("It\'s a tie!");
-    }
-
-    public void notifyInvalid(String prompt) {
-        output.println(String.format("Invalid %s", prompt));
-    }
-
     public String getInput() {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
@@ -52,15 +51,21 @@ public class Display {
         return this.userInput;
     }
 
-    public void promptForMark(String prompt) {
-        output.println(String.format("%s, please choose your mark for the game:", prompt));
+    public void notifyInvalid(String prompt) {
+        output.println(String.format("Invalid %s. Please try again", prompt));
     }
 
-    public void print(String message) {
+    public void announceWinner(String playerMark) {
+        output.println(String.format("Player %s wins!", playerMark));
+    }
+
+    public void announceTie() {
+        output.println("It\'s a tie!");
+    }
+
+    public void printMessage(String message) {
         output.println(message);
     }
 
-    public void askforGameType() {
-        output.println("Type hh to play Human vs Human, or hc to play Human vs Computer");
-    }
+    public void confirmSavedGameHasReloaded() { output.println("Here's your saved game:"); }
 }

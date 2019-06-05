@@ -16,3 +16,6 @@ src/test/.DS_Store
 # Ignore artifacts and MANIFEST
 out/
 src/META-INF
+
+# Ignore locally saved game
+saved_game.txt

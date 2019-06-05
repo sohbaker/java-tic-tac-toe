@@ -18,6 +18,8 @@ public class Human implements Player {
 
         if (move.matches("[0-9]+") && move.length() < 2) {
             moveAsInt = Integer.parseInt(move);
+        } else if (move.equalsIgnoreCase("exit")) {
+            moveAsInt = -2;
         } else {
             display.notifyInvalid("move");
             getMove();

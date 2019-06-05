@@ -1,13 +1,15 @@
-public class Game {
+import java.io.*;
+
+public class Game implements Serializable {
     private final Display display;
     private final Player playerOne;
     private final Player playerTwo;
     private Player currentPlayer;
     private Board board;
 
-    public Game(Board currentBoard, Display currentDisplay, Player player1, Player player2) {
+    public Game(Board currentBoard, Display display, Player player1, Player player2) {
         this.board = currentBoard;
-        this.display = currentDisplay;
+        this.display = display;
         this.currentPlayer = player1;
         this.playerOne = player1;
         this.playerTwo = player2;
@@ -35,14 +37,16 @@ public class Game {
         showOutcome(this.currentPlayer.getMark());
     }
 
-    private boolean validateMove(int move) {
+    private void validateMove(int move) {
+        if (move == -2) {
+            saveGameState();
+        }
+
         if (board.isValidMove(move)) {
             this.board.markBoard(move, this.currentPlayer.getMark());
-            return true;
         } else {
             getNewMove();
         }
-        return false;
     }
 
     private void getNewMove(){
@@ -65,5 +69,22 @@ public class Game {
         } else {
             this.currentPlayer = this.playerOne;
         }
+    }
+
+    private void saveGameState() {
+        String filename = "saved_game.txt";
+        try {
+            FileOutputStream file = new FileOutputStream(filename);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(this.board);
+            out.writeObject(this.currentPlayer.getMark());
+            out.writeObject(this.board.getOpponentMark(this.currentPlayer.getMark()));
+            out.close();
+            file.close();
+            display.printMessage("Your game has been saved!");
+        } catch (IOException ex) {
+            System.out.println(String.format("IOException caught %s", ex));
+        }
+        System.exit(0);
     }
 }

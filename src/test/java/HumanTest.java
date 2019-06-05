@@ -20,4 +20,13 @@ public class HumanTest {
         human = new Human("O", displaySpy);
         assertEquals(1, human.getMove());
     }
+
+    @Test
+    public void returnsIntegerIfUserTypesExit() {
+        String exit = "exit";
+        InputStream fakeInput = new ByteArrayInputStream((exit + "\n").getBytes());
+        displaySpy = new DisplaySpy(System.out, fakeInput);
+        human = new Human("X", displaySpy);
+        assertEquals(-2, human.getMove());
+    }
 }

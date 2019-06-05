@@ -19,6 +19,11 @@ public class FakePlayer implements Player {
     public int getMove() {
         this.newMoves.addAll(this.moves);
         String move = this.newMoves.pollFirst();
-        return Integer.parseInt(move);
+
+       if (move.equalsIgnoreCase("exit")) {
+           return -2;
+       } else {
+           return Integer.parseInt(move);
+       }
     }
 }

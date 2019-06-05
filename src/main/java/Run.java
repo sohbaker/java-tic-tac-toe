@@ -1,22 +1,53 @@
+import java.io.*;
+
 public class Run {
     private static Game game;
     private static Display display = new Display(System.out, System.in);
 
     public static void main(String[] args) {
         display.printGreeting();
-        String gameType = getGameType();
-        String[] chosenMarks = getPlayersToChooseMarks();
-        setUpGame(gameType, chosenMarks);
+        display.printInstructions();
+        if (args.length == 0) {
+            createNewGame();
+        } else {
+            reloadPreviousGame(args[0]);
+        }
         game.play();
     }
 
+    private static void createNewGame() {
+        String gameType = getGameType();
+        String[] chosenMarks = getPlayersToChooseMarks();
+        setUpNewGame(gameType, chosenMarks);
+    }
+
+    private static void reloadPreviousGame(String args) {
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(args));
+            Board savedBoard = (Board) in.readObject();
+            String playerOneMark = (String) in.readObject();
+            String playerTwoMark = (String) in.readObject();
+
+            Human player1 = new Human(playerOneMark, display);
+            Human player2 = new Human(playerTwoMark, display);
+
+            game = new Game(savedBoard, display, player1, player2);
+            display.confirmSavedGameHasReloaded();
+
+        } catch (IOException ex) {
+            System.out.println(String.format("IO Exception %s", ex));
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Class not found");
+        }
+    }
+
     private static String getGameType() {
-        display.askforGameType();
+        display.askForGameType();
         String gameType = display.getInput();
         if (gameType.equalsIgnoreCase("hh")) {
             return gameType;
         } else {
-            display.print("Coming soon!");
+            display.printMessage("Coming soon!");
             System.exit(0);
         }
         return "";
@@ -30,12 +61,12 @@ public class Run {
         marks[1] = display.getInput();
 
         for (String mark : marks) {
-            mark = mark.replaceAll("\\s", "");
+            mark.replaceAll("\\s", "");
         }
         return marks;
     }
 
-    private static void setUpGame(String gameType, String[] marks) {
+    private static void setUpNewGame(String gameType, String[] marks) {
         PlayersFactory playerFactory = new PlayersFactory();
         Players getPlayers = playerFactory.getPlayers(gameType);
         Player[] players = getPlayers.createPlayers(marks[0], marks[1], display);
