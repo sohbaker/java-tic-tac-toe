@@ -6,11 +6,10 @@ public class Game implements Serializable {
     private final Player playerTwo;
     private Player currentPlayer;
     private Board board;
-    private boolean stopGame = false;
 
-    public Game(Board currentBoard, Display currentDisplay, Player player1, Player player2) {
+    public Game(Board currentBoard, Display display, Player player1, Player player2) {
         this.board = currentBoard;
-        this.display = currentDisplay;
+        this.display = display;
         this.currentPlayer = player1;
         this.playerOne = player1;
         this.playerTwo = player2;
@@ -26,7 +25,7 @@ public class Game implements Serializable {
     }
 
     public void play() {
-        while (!isOver() && !stopGame) {
+        while (!isOver()) {
             display.printGrid(board);
             display.promptPlayer(currentPlayer.getMark());
             int move = this.currentPlayer.getMove();
@@ -35,21 +34,19 @@ public class Game implements Serializable {
                 togglePlayer();
             }
         }
-        if (stopGame) {
-            saveGameState();
-        }
         showOutcome(this.currentPlayer.getMark());
     }
 
-    private boolean validateMove(int move) {
-        if (move == -2) { saveGameState(); }
+    private void validateMove(int move) {
+        if (move == -2) {
+            saveGameState();
+        }
+
         if (board.isValidMove(move)) {
             this.board.markBoard(move, this.currentPlayer.getMark());
-            return true;
         } else {
             getNewMove();
         }
-        return false;
     }
 
     private void getNewMove(){
@@ -84,7 +81,7 @@ public class Game implements Serializable {
             out.writeObject(this.board.getOpponentMark(this.currentPlayer.getMark()));
             out.close();
             file.close();
-            System.out.println("Object serialized");
+            display.printMessage("Your game has been saved!");
         } catch (IOException ex) {
             System.out.println(String.format("IOException caught %s", ex));
         }

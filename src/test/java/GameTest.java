@@ -67,4 +67,15 @@ public class GameTest {
         game.play();
         assertTrue(display.notifyInvalidShouldHaveBeenCalled());
     }
+
+    @Test
+    public void endsTheGameLoopWhenUserTypesExit() {
+        List<String> playerOneMoves = Arrays.asList("1", "2", "exit");
+        List<String> playerTwoMoves = Arrays.asList("2", "5");
+        player1 = new FakePlayer("X", display, playerOneMoves);
+        player2 = new FakePlayer("O", display, playerTwoMoves);
+        Game game = new Game(board, display, player1, player2);
+        game.play();
+        assertTrue(display.confirmSavedGameReloadedShouldHaveBeenCalled());
+    }
 }
