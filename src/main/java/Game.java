@@ -34,6 +34,7 @@ public class Game implements Serializable {
                 togglePlayer();
             }
         }
+        saveGameState();
         showOutcome(this.currentPlayer.getMark());
     }
 
@@ -76,12 +77,13 @@ public class Game implements Serializable {
         try {
             FileOutputStream file = new FileOutputStream(filename);
             ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(this.isOver());
             out.writeObject(this.board);
             out.writeObject(this.currentPlayer.getMark());
             out.writeObject(this.board.getOpponentMark(this.currentPlayer.getMark()));
             out.close();
             file.close();
-            display.printMessage("Your game has been saved!");
+            display.confirmGameIsSaved();
         } catch (IOException ex) {
             System.out.println(String.format("IOException caught %s", ex));
         }

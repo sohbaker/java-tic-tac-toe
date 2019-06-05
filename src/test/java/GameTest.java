@@ -76,6 +76,6 @@ public class GameTest {
         player2 = new FakePlayer("O", display, playerTwoMoves);
         Game game = new Game(board, display, player1, player2);
         game.play();
-        assertTrue(display.confirmSavedGameReloadedShouldHaveBeenCalled());
+        assertTrue(display.confirmGameIsSavedShouldHaveBeenCalled());
     }
 }
