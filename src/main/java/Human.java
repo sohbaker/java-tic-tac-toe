@@ -16,7 +16,7 @@ public class Human implements Player {
         String move = display.getInput();
         move = move.replaceAll("\\s","");
 
-        if (move.matches("[0-9]+") && move.length() < 2 && move != "exit") {
+        if (move.matches("[0-9]+") && move.length() < 2) {
             moveAsInt = Integer.parseInt(move);
         } else if (move.equalsIgnoreCase("exit")) {
             moveAsInt = -2;
