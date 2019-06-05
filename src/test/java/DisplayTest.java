@@ -67,13 +67,25 @@ public class DisplayTest {
 
     @Test
     public void printsAGivenMessage() {
-        display.print("foobar");
+        display.printMessage("foobar");
         assertThat(outputContent.toString(), containsString("foobar"));
     }
 
     @Test
     public void asksThePlayerForATypeOfGame() {
-        display.askforGameType();
+        display.askForGameType();
         assertThat(outputContent.toString(), containsString("Type hh to play Human vs Human, or hc to play Human vs Computer"));
+    }
+
+    @Test
+    public void printsTheGameInstructions() {
+        display.printInstructions();
+        assertThat(outputContent.toString(), containsString("type 'exit' to leave the game"));
+    }
+
+    @Test
+    public void letsTheUserKnowThatASavedGameHasBeenLoaded() {
+        display.confirmSavedGameHasReloaded();
+        assertThat(outputContent.toString(), containsString("Here's your saved game:"));
     }
 }
