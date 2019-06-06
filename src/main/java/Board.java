@@ -25,7 +25,7 @@ public class Board implements Serializable {
 
     public boolean isValidMove(int position) {
         int index = position - 1;
-        return !grid.get(index).equals(PLAYER_MARKS[0]) && !grid.get(index).equals(PLAYER_MARKS[1]);
+        return !grid.get(index).matches(PLAYER_MARKS[0]) && !grid.get(index).matches(PLAYER_MARKS[1]);
     }
 
     public boolean playerHasWon(String mark) {
@@ -35,7 +35,7 @@ public class Board implements Serializable {
     public List<String> availableMoves() {
         List<String> availableCells = new ArrayList<>();
         for (int i = 0; i < grid.size(); i++) {
-            if (!grid.get(i).equals(PLAYER_MARKS[0]) && !grid.get(i).equals(PLAYER_MARKS[1])) availableCells.add(grid.get(i));
+            if (!grid.get(i).matches(PLAYER_MARKS[0]) && !grid.get(i).matches(PLAYER_MARKS[1])) availableCells.add(grid.get(i));
         }
         return availableCells;
     }
@@ -44,7 +44,7 @@ public class Board implements Serializable {
         String opponent = null;
 
         for (String PLAYER_MARK : PLAYER_MARKS) {
-            if(!PLAYER_MARK.equals(mark)) {
+            if(!PLAYER_MARK.matches(mark)) {
                 opponent = PLAYER_MARK;
             }
         }
