@@ -2,13 +2,10 @@ import java.util.*;
 
 public class FakePlayer implements Player {
     private String mark;
-    private Display display;
-    private LinkedList<String> newMoves = new LinkedList<String>();
     private List<String> moves;
 
-    public FakePlayer(String mark, Display display, List<String> moves) {
+    public FakePlayer(String mark, List<String> moves) {
         this.mark = mark;
-        this.display = display;
         this.moves = moves;
     }
 
@@ -17,13 +14,13 @@ public class FakePlayer implements Player {
     }
 
     public int getMove() {
-        this.newMoves.addAll(this.moves);
-        String move = this.newMoves.pollFirst();
+        String move = this.moves.get(0);
+        this.moves = this.moves.subList(1, this.moves.size());
 
-       if (move.equalsIgnoreCase("exit")) {
-           return -2;
-       } else {
-           return Integer.parseInt(move);
-       }
+        if (move.equalsIgnoreCase("exit")) {
+            return -2;
+        } else {
+            return Integer.parseInt(move);
+        }
     }
 }
