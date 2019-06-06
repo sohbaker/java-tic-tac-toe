@@ -15,9 +15,9 @@ public class ComputerTest {
     }
 
     @Test
-    public void returnsAMove() {
+    public void returnsARandomMove() {
         computer = new Computer(board, mark);
         int move = computer.getMove();
-        assertTrue((move >= 0 && move <= 9));
+        assertTrue(board.isValidMove(move));
     }
 }

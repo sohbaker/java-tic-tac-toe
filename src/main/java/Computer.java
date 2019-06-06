@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Computer implements Player {
     private String mark;
     private Board board;
@@ -12,6 +14,9 @@ public class Computer implements Player {
     }
 
     public int getMove() {
-        return 0;
+        Random selectRandom = new Random();
+        List<String> availableMoves = board.availableMoves();
+        String move = availableMoves.get(selectRandom.nextInt(availableMoves.size()));
+        return Integer.parseInt(move);
     }
 }
