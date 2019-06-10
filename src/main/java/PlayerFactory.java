@@ -1,9 +1,9 @@
-public class PlayersFactory {
+public class PlayerFactory {
     String[] types;
     Board board;
     Display display;
 
-    public PlayersFactory(String[] types, Board board, Display display) {
+    public PlayerFactory(String[] types, Board board, Display display) {
         this.types = types;
         this.board = board;
         this.display = display;
