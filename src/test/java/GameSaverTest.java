@@ -1,5 +1,6 @@
 import org.junit.*;
 
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 public class GameSaverTest {
@@ -9,7 +10,7 @@ public class GameSaverTest {
     private DisplaySpy displaySpy;
     private Human player1;
     private Human player2;
-    private String filename = "test_save.txt";
+    private String filename = "test_save_1.txt";
 
     @Before
     public void createDummyGame() {
@@ -29,8 +30,16 @@ public class GameSaverTest {
     }
 
     @Test
-    public void canReadFileOnceSaved() {
+    public void canReadAFileOnceSaved() {
+        gamesaver.saveGame(board, player1.getMark(), board.getOpponentMark(player1.getMark()));
         gamesaver.readSavedFile();
         assertTrue(gamesaver.fileRead);
+    }
+
+    @Test
+    public void knowsWhetherTheSavedGameIsOver() {
+        gamesaver.saveGame(board, player1.getMark(), board.getOpponentMark(player1.getMark()));
+        gamesaver.readSavedFile();
+        assertFalse(gamesaver.savedGameIsOver());
     }
 }

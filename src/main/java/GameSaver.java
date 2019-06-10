@@ -41,4 +41,11 @@ public class GameSaver {
             System.out.println(String.format("Class Not Found Exception caught %s", ClEx));
         }
     }
+
+    public boolean savedGameIsOver() {
+        System.out.println(savedBoard.isFull());
+        System.out.println(savedBoard.playerHasWon(this.playerOneMark));
+        System.out.println(savedBoard.playerHasWon(this.playerTwoMark));
+        return (this.savedBoard.isFull() || this.savedBoard.playerHasWon(this.playerOneMark) || this.savedBoard.playerHasWon(this.playerTwoMark));
+    }
 }
