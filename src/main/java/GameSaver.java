@@ -53,7 +53,7 @@ public class GameSaver {
     public void reloadSavedGame() {
         Human playerOne = new Human(playerOneMark, display);
         Human playerTwo = new Human(playerTwoMark, display);
-        this.game = new Game(savedBoard, display, playerOne, playerTwo);
+        this.game = new Game(savedBoard, display, playerOne, playerTwo, this);
         display.confirmSavedGameHasReloaded();
     }
 }
