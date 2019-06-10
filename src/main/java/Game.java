@@ -9,12 +9,13 @@ public class Game implements Serializable {
     private boolean stopGame = false;
     private GameSaver gameSaver;
 
-    public Game(Board currentBoard, Display display, Player player1, Player player2) {
+    public Game(Board currentBoard, Display display, Player player1, Player player2, GameSaver gameSaver) {
         this.board = currentBoard;
         this.display = display;
         this.currentPlayer = player1;
         this.playerOne = player1;
         this.playerTwo = player2;
+        this.gameSaver = gameSaver;
     }
 
     public boolean isOver() {
@@ -82,8 +83,6 @@ public class Game implements Serializable {
     }
 
     private void saveGameState() {
-        String filename = "saved_game.txt";
-        gameSaver = new GameSaver(filename, this.display);
         gameSaver.saveGame(this.board, this.currentPlayer.getMark(), this.board.getOpponentMark(this.currentPlayer.getMark()));
     }
 }
