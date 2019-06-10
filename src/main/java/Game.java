@@ -58,7 +58,6 @@ public class Game implements Serializable {
         switch (move) {
             case -2:
                 stopGame = true;
-                saveGameState();
                 break;
             default:
                 this.board.markBoard(move, this.currentPlayer.getMark());
