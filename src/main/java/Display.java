@@ -15,7 +15,9 @@ public class Display implements Serializable {
         output.println("Welcome to Tic Tac Toe!");
     }
 
-    public void printInstructions() { output.println("At any point you can type 'exit' to leave the game and continue at a later time"); }
+    public void printInstructions() {
+        output.println("At any point you can type 'exit' to leave the game and continue at a later time");
+    }
 
     public void promptPlayer(String playerMark) {
         output.println(String.format("Make a move: %s", playerMark));
@@ -57,7 +59,7 @@ public class Display implements Serializable {
         String row2 = gridCells.get(3) + " | " + gridCells.get(4) + " | " + gridCells.get(5) + "\n";
         String row3 = gridCells.get(6) + " | " + gridCells.get(7) + " | " + gridCells.get(8);
 
-        String wholeGrid = row1 + row2 +row3;
+        String wholeGrid = row1 + row2 + row3;
 
         output.println(wholeGrid);
     }
@@ -88,7 +90,11 @@ public class Display implements Serializable {
         output.println(message);
     }
 
-    public void confirmGameIsSaved() { output.println("Your game has been saved!"); }
+    public void confirmGameIsSaved() {
+        output.println("Your game has been saved!");
+    }
 
-    public void confirmSavedGameHasReloaded() { output.println("Here's your saved game:"); }
+    public void confirmSavedGameHasReloaded() {
+        output.println("Here's your saved game:");
+    }
 }
