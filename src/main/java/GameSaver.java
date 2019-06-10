@@ -7,6 +7,7 @@ public class GameSaver {
     private String playerOneMark;
     private String playerTwoMark;
     public boolean fileRead = false;
+    private Game game;
 
     public GameSaver(String filename, Display display) {
         this.filename = filename;
@@ -47,5 +48,12 @@ public class GameSaver {
         System.out.println(savedBoard.playerHasWon(this.playerOneMark));
         System.out.println(savedBoard.playerHasWon(this.playerTwoMark));
         return (this.savedBoard.isFull() || this.savedBoard.playerHasWon(this.playerOneMark) || this.savedBoard.playerHasWon(this.playerTwoMark));
+    }
+
+    public void reloadSavedGame() {
+        Human playerOne = new Human(playerOneMark, display);
+        Human playerTwo = new Human(playerTwoMark, display);
+        this.game = new Game(savedBoard, display, playerOne, playerTwo);
+        display.confirmSavedGameHasReloaded();
     }
 }

@@ -42,4 +42,12 @@ public class GameSaverTest {
         gamesaver.readSavedFile();
         assertFalse(gamesaver.savedGameIsOver());
     }
+
+    @Test
+    public void canReloadAPreviouslySavedGame() {
+        gamesaver.saveGame(board, player1.getMark(), board.getOpponentMark(player1.getMark()));
+        gamesaver.readSavedFile();
+        gamesaver.reloadSavedGame();
+        assertTrue(displaySpy.confirmGameReloadedShouldHaveBeenCalled());
+    }
 }
