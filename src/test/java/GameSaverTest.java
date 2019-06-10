@@ -9,6 +9,7 @@ public class GameSaverTest {
     private DisplaySpy displaySpy;
     private Human player1;
     private Human player2;
+    private String filename = "test_save.txt";
 
     @Before
     public void createDummyGame() {
@@ -18,12 +19,18 @@ public class GameSaverTest {
         player1 = new Human(marks[0], displaySpy);
         player2 = new Human(marks[1], displaySpy);
         game = new Game(board, displaySpy, player1, player2);
-        gamesaver = new GameSaver("test_save.txt", displaySpy);
+        gamesaver = new GameSaver(filename, displaySpy);
     }
 
     @Test
     public void canSaveAGivenSetOfGameObjects() {
         gamesaver.saveGame(board, player1.getMark(), board.getOpponentMark(player1.getMark()));
         assertTrue(displaySpy.confirmGameIsSavedShouldHaveBeenCalled());
+    }
+
+    @Test
+    public void canReadFileOnceSaved() {
+        gamesaver.readSavedFile();
+        assertTrue(gamesaver.fileRead);
     }
 }
