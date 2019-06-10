@@ -19,3 +19,4 @@ src/META-INF
 
 # Ignore locally saved game
 saved_game.txt
+test_save.txt

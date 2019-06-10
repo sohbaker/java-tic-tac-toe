@@ -7,13 +7,15 @@ public class Game implements Serializable {
     private Player currentPlayer;
     private Board board;
     private boolean stopGame = false;
+    private GameSaver gameSaver;
 
-    public Game(Board currentBoard, Display display, Player player1, Player player2) {
+    public Game(Board currentBoard, Display display, Player player1, Player player2, GameSaver gameSaver) {
         this.board = currentBoard;
         this.display = display;
         this.currentPlayer = player1;
         this.playerOne = player1;
         this.playerTwo = player2;
+        this.gameSaver = gameSaver;
     }
 
     public boolean isOver() {
@@ -81,19 +83,6 @@ public class Game implements Serializable {
     }
 
     private void saveGameState() {
-        String filename = "saved_game.txt";
-        try {
-            FileOutputStream file = new FileOutputStream(filename);
-            ObjectOutputStream out = new ObjectOutputStream(file);
-            out.writeObject(this.isOver());
-            out.writeObject(this.board);
-            out.writeObject(this.currentPlayer.getMark());
-            out.writeObject(this.board.getOpponentMark(this.currentPlayer.getMark()));
-            out.close();
-            file.close();
-            display.confirmGameIsSaved();
-        } catch (IOException ex) {
-            System.out.println(String.format("IOException caught %s", ex));
-        }
+        gameSaver.saveGame(this.board, this.currentPlayer.getMark(), this.board.getOpponentMark(this.currentPlayer.getMark()));
     }
 }

@@ -5,6 +5,7 @@ public class DisplaySpy extends Display {
     private boolean tie = false;
     private boolean invalid = false;
     private boolean savedGame = false;
+    private boolean reloadedGame = false;
 
     public DisplaySpy(PrintStream output, InputStream input) {
         super(output, input);
@@ -34,17 +35,24 @@ public class DisplaySpy extends Display {
     }
 
     @Override
-    public void confirmGameIsSaved() { this.savedGame = true; }
+    public void confirmGameIsSaved() {
+        this.savedGame = true;
+    }
 
     @Override
-    public void printMessage(String mark) { }
+    public void confirmSavedGameHasReloaded() {
+        this.reloadedGame = true;
+    }
+
+    @Override
+    public void printMessage(String mark) {
+    }
 
     public boolean announceWinnerShouldHaveBeenCalled() {
         return win;
     }
 
-    public boolean announceTieShouldHaveBeenCalled()
-    {
+    public boolean announceTieShouldHaveBeenCalled() {
         return tie;
     }
 
@@ -52,5 +60,11 @@ public class DisplaySpy extends Display {
         return invalid;
     }
 
-    public boolean confirmGameIsSavedShouldHaveBeenCalled() { return savedGame; }
+    public boolean confirmGameIsSavedShouldHaveBeenCalled() {
+        return savedGame;
+    }
+
+    public boolean confirmGameReloadedShouldHaveBeenCalled() {
+        return reloadedGame;
+    }
 }

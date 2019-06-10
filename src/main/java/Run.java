@@ -1,8 +1,8 @@
-import java.io.*;
-
 public class Run {
     private static Game game;
     private static Display display = new Display(System.out, System.in);
+    private static String filename = "saved_game.txt";
+    private static GameSaver gameSaver = new GameSaver(filename, display);
 
     public static void main(String[] args) {
         display.printGreeting();
@@ -16,18 +16,10 @@ public class Run {
     }
 
     private static void determineWhatTypeOfGameToLoad(String arg) {
-        try {
-            ObjectInputStream file = new ObjectInputStream(new FileInputStream(arg));
-            boolean gameIsOver = (boolean) file.readObject();
-            if (gameIsOver) {
-                createNewGame();
-            } else {
-                reloadPreviousGame(file);
-            }
-        } catch (IOException ex) {
-            System.out.println("IOException caught");
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Class not found");
+        if (gameSaver.savedGameIsOver()) {
+            createNewGame();
+        } else {
+            gameSaver.reloadSavedGame();
         }
     }
 
@@ -35,22 +27,6 @@ public class Run {
         String gameType = getGameType();
         String[] chosenMarks = getPlayerMarks(gameType);
         setUpNewGame(gameType, chosenMarks);
-    }
-
-    private static void reloadPreviousGame(ObjectInputStream in) {
-        try {
-            Board savedBoard = (Board) in.readObject();
-            String playerOneMark = (String) in.readObject();
-            String playerTwoMark = (String) in.readObject();
-            Human player1 = new Human(playerOneMark, display);
-            Human player2 = new Human(playerTwoMark, display);
-            game = new Game(savedBoard, display, player1, player2);
-            display.confirmSavedGameHasReloaded();
-        } catch (IOException ex) {
-            System.out.println(String.format("IO Exception %s", ex));
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Class not found");
-        }
     }
 
     private static String getGameType() {
@@ -75,7 +51,7 @@ public class Run {
         PlayerFactory playerFactory = new PlayerFactory(board, display);
         Player player1 = playerFactory.createPlayer(marks[0], playerTypes[0]);
         Player player2 = playerFactory.createPlayer(marks[1], playerTypes[1]);
-        game = new Game(board, display, player1, player2);
+        game = new Game(board, display, player1, player2, gameSaver);
     }
 }
 
