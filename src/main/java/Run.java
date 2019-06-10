@@ -72,9 +72,9 @@ public class Run {
     private static void setUpNewGame(String gameType, String[] marks) {
         String[] playerTypes = gameType.split("");
         Board board = new Board(marks);
-        PlayersFactory playerFactory = new PlayersFactory(playerTypes, board, display);
-        Player player1 = playerFactory.createPlayer(marks[0]);
-        Player player2 = playerFactory.createPlayer(marks[1]);
+        PlayerFactory playerFactory = new PlayerFactory(board, display);
+        Player player1 = playerFactory.createPlayer(marks[0], playerTypes[0]);
+        Player player2 = playerFactory.createPlayer(marks[1], playerTypes[1]);
         game = new Game(board, display, player1, player2);
     }
 }
