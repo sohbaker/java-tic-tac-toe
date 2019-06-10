@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Board implements Serializable {
-    private final List grid = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    private final List<String> grid = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
     private static final int[][] WINNING_LINES = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {2, 4, 6}, {0, 4, 8}};
     private String[] PLAYER_MARKS = new String[2];
 
@@ -25,17 +25,17 @@ public class Board implements Serializable {
 
     public boolean isValidMove(int position) {
         int index = position - 1;
-        return grid.get(index) != PLAYER_MARKS[0] && grid.get(index) != PLAYER_MARKS[1];
+        return !grid.get(index).matches(PLAYER_MARKS[0]) && !grid.get(index).matches(PLAYER_MARKS[1]);
     }
 
     public boolean playerHasWon(String mark) {
         return playerHasWinningLine(mark);
     }
 
-    public List availableMoves() {
-        List<Integer> availableCells = new ArrayList<>();
+    public List<String> availableMoves() {
+        List<String> availableCells = new ArrayList<>();
         for (int i = 0; i < grid.size(); i++) {
-            if (grid.get(i) != PLAYER_MARKS[0] && grid.get(i) != PLAYER_MARKS[1]) availableCells.add(i + 1);
+            if (!grid.get(i).matches(PLAYER_MARKS[0]) && !grid.get(i).matches(PLAYER_MARKS[1])) availableCells.add(grid.get(i));
         }
         return availableCells;
     }
@@ -43,9 +43,9 @@ public class Board implements Serializable {
     public String getOpponentMark(String mark) {
         String opponent = null;
 
-        for (int i = 0; i < PLAYER_MARKS.length; i++) {
-            if(PLAYER_MARKS[i] != mark) {
-                opponent = PLAYER_MARKS[i];
+        for (String PLAYER_MARK : PLAYER_MARKS) {
+            if(!PLAYER_MARK.matches(mark)) {
+                opponent = PLAYER_MARK;
             }
         }
         return opponent;
@@ -70,7 +70,7 @@ public class Board implements Serializable {
     }
 
     private String getCellAtPosition(int i) {
-        return grid.get(i).toString();
+        return grid.get(i);
     }
 
     private boolean playerHasWinningLine(String mark) {

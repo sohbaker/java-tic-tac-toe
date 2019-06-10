@@ -10,30 +10,42 @@ public class Run {
         if (args.length == 0) {
             createNewGame();
         } else {
-            reloadPreviousGame(args[0]);
+            determineWhatTypeOfGameToLoad(args[0]);
         }
         game.play();
     }
 
+    private static void determineWhatTypeOfGameToLoad(String arg) {
+        try {
+            ObjectInputStream file = new ObjectInputStream(new FileInputStream(arg));
+            boolean gameIsOver = (boolean) file.readObject();
+            if (gameIsOver) {
+                createNewGame();
+            } else {
+                reloadPreviousGame(file);
+            }
+        } catch (IOException ex) {
+            System.out.println("IOException caught");
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Class not found");
+        }
+    }
+
     private static void createNewGame() {
         String gameType = getGameType();
-        String[] chosenMarks = getPlayersToChooseMarks();
+        String[] chosenMarks = getPlayerMarks(gameType);
         setUpNewGame(gameType, chosenMarks);
     }
 
-    private static void reloadPreviousGame(String args) {
+    private static void reloadPreviousGame(ObjectInputStream in) {
         try {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(args));
             Board savedBoard = (Board) in.readObject();
             String playerOneMark = (String) in.readObject();
             String playerTwoMark = (String) in.readObject();
-
             Human player1 = new Human(playerOneMark, display);
             Human player2 = new Human(playerTwoMark, display);
-
             game = new Game(savedBoard, display, player1, player2);
             display.confirmSavedGameHasReloaded();
-
         } catch (IOException ex) {
             System.out.println(String.format("IO Exception %s", ex));
         } catch (ClassNotFoundException ex) {
@@ -44,35 +56,26 @@ public class Run {
     private static String getGameType() {
         display.askForGameType();
         String gameType = display.getInput();
-        if (gameType.equalsIgnoreCase("hh")) {
-            return gameType;
-        } else {
-            display.printMessage("Coming soon!");
-            System.exit(0);
-        }
-        return "";
+        return gameType;
     }
 
-    private static String[] getPlayersToChooseMarks() {
-        String[] marks = new String[2];
-        display.promptForMark("Player 1");
-        marks[0] = display.getInput();
-        display.promptForMark("Player 2");
-        marks[1] = display.getInput();
-
-        for (String mark : marks) {
-            mark.replaceAll("\\s", "");
+    private static String[] getPlayerMarks(String gameType) {
+        String[] chosenMarks = new String[2];
+        if (gameType.equalsIgnoreCase("hh")) {
+            chosenMarks = display.getPlayersToChooseMarks();
+        } else if (gameType.equalsIgnoreCase("hc")) {
+            chosenMarks = display.getPlayersToChooseMarks("\uD83D\uDDA5");
         }
-        return marks;
+        return chosenMarks;
     }
 
     private static void setUpNewGame(String gameType, String[] marks) {
-        PlayersFactory playerFactory = new PlayersFactory();
-        Players getPlayers = playerFactory.getPlayers(gameType);
-        Player[] players = getPlayers.createPlayers(marks[0], marks[1], display);
-
+        String[] playerTypes = gameType.split("");
         Board board = new Board(marks);
-        game = new Game(board, display, players[0], players[1]);
+        PlayerFactory playerFactory = new PlayerFactory(board, display);
+        Player player1 = playerFactory.createPlayer(marks[0], playerTypes[0]);
+        Player player2 = playerFactory.createPlayer(marks[1], playerTypes[1]);
+        game = new Game(board, display, player1, player2);
     }
 }
 

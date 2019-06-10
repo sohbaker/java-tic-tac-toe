@@ -84,6 +84,12 @@ public class DisplayTest {
     }
 
     @Test
+    public void confirmsThatTheGameHasBeenSaved() {
+        display.confirmGameIsSaved();
+        assertThat(outputContent.toString(), containsString("Your game has been saved!"));
+    }
+
+    @Test
     public void letsTheUserKnowThatASavedGameHasBeenLoaded() {
         display.confirmSavedGameHasReloaded();
         assertThat(outputContent.toString(), containsString("Here's your saved game:"));

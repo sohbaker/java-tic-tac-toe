@@ -6,6 +6,7 @@ public class Game implements Serializable {
     private final Player playerTwo;
     private Player currentPlayer;
     private Board board;
+    private boolean stopGame = false;
 
     public Game(Board currentBoard, Display display, Player player1, Player player2) {
         this.board = currentBoard;
@@ -25,40 +26,48 @@ public class Game implements Serializable {
     }
 
     public void play() {
-        while (!isOver()) {
+        while (!isOver() && !stopGame) {
             display.printGrid(board);
             display.promptPlayer(currentPlayer.getMark());
-            int move = this.currentPlayer.getMove();
-            validateMove(move);
-            if(!this.board.playerHasWon(this.currentPlayer.getMark())) {
+            int validMove = validateMove();
+            makeMove(validMove);
+
+            if (!this.board.playerHasWon(this.currentPlayer.getMark()) && !stopGame) {
                 togglePlayer();
             }
         }
         showOutcome(this.currentPlayer.getMark());
+        saveGameState();
     }
 
-    private void validateMove(int move) {
-        if (move == -2) {
-            saveGameState();
+    private int validateMove() {
+        int move = this.currentPlayer.getMove();
+        while (move != -2 && !board.isValidMove(move)) {
+            move = getNewMove();
         }
-
-        if (board.isValidMove(move)) {
-            this.board.markBoard(move, this.currentPlayer.getMark());
-        } else {
-            getNewMove();
-        }
+        return move;
     }
 
-    private void getNewMove(){
+    private int getNewMove() {
         display.notifyInvalid("move");
         int newMove = this.currentPlayer.getMove();
-        validateMove(newMove);
+        return newMove;
+    }
+
+    private void makeMove(int move) {
+        switch (move) {
+            case -2:
+                stopGame = true;
+                break;
+            default:
+                this.board.markBoard(move, this.currentPlayer.getMark());
+        }
     }
 
     private void showOutcome(String mark) {
         if (this.board.isATie()) {
             this.display.announceTie();
-        } else if(this.board.playerHasWon(mark)) {
+        } else if (this.board.playerHasWon(mark)) {
             this.display.announceWinner(mark);
         }
     }
@@ -76,15 +85,15 @@ public class Game implements Serializable {
         try {
             FileOutputStream file = new FileOutputStream(filename);
             ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(this.isOver());
             out.writeObject(this.board);
             out.writeObject(this.currentPlayer.getMark());
             out.writeObject(this.board.getOpponentMark(this.currentPlayer.getMark()));
             out.close();
             file.close();
-            display.printMessage("Your game has been saved!");
+            display.confirmGameIsSaved();
         } catch (IOException ex) {
             System.out.println(String.format("IOException caught %s", ex));
         }
-        System.exit(0);
     }
 }

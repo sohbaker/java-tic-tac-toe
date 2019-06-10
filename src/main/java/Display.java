@@ -29,6 +29,27 @@ public class Display implements Serializable {
         output.println(String.format("%s, please choose your mark for the game:", prompt));
     }
 
+    public String[] getPlayersToChooseMarks(String... args) {
+        String[] marks = new String[2];
+
+        if (args.length == 0) {
+            promptForMark("Player 1");
+            marks[0] = getInput();
+            promptForMark("Player 2");
+            marks[1] = getInput();
+        } else {
+            promptForMark("Player 1");
+            marks[0] = getInput();
+            marks[1] = args[0];
+        }
+
+        for (String mark : marks) {
+            mark.replaceAll("\\s", "");
+        }
+
+        return marks;
+    }
+
     public void printGrid(Board board) {
         List gridCells = board.gridCells();
 
@@ -66,6 +87,8 @@ public class Display implements Serializable {
     public void printMessage(String message) {
         output.println(message);
     }
+
+    public void confirmGameIsSaved() { output.println("Your game has been saved!"); }
 
     public void confirmSavedGameHasReloaded() { output.println("Here's your saved game:"); }
 }
