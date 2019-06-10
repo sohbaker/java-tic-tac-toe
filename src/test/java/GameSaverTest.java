@@ -9,7 +9,7 @@ public class GameSaverTest {
     private DisplaySpy displaySpy;
     private Human player1;
 
-    private String filename = "test_save_1.txt";
+    private String filename = "test_save.txt";
 
     @Before
     public void createDummyGame() {
