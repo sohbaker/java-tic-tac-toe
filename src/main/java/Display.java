@@ -23,8 +23,9 @@ public class Display implements Serializable {
         output.println(String.format("Make a move: %s", playerMark));
     }
 
-    public void askForGameType() {
+    public String askForGameType() {
         output.println("Type hh to play Human vs Human, or hc to play Human vs Computer");
+        return getInput();
     }
 
     public void promptForMark(String prompt) {
