@@ -23,7 +23,7 @@ public class GameFactoryTest {
 
     @Test
     public void canReloadASavedGame() {
-        gameFactory.reloadExistingGameIfNotOver();
+        gameFactory.loadSavedGame();
         assertTrue(displaySpy.confirmGameReloadedShouldHaveBeenCalled());
     }
 }

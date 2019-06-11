@@ -8,16 +8,21 @@ public class GameFactory {
         this.gameSaver = new GameSaver(filename, display);
     }
 
-    public Game createNewGame() {
-        String gameType = getGameType();
-        String[] chosenMarks = getPlayerMarks(gameType);
-        game = setUpNewGame(gameType, chosenMarks);
+    public Game loadGame() {
+        gameSaver.readFile();
+        if (this.gameSaver.fileNotFound || this.gameSaver.savedGameIsOver()) {
+            game = createNewGame();
+        } else {
+            game = loadSavedGame();
+        }
         return game;
     }
 
-    private String getGameType() {
-        display.askForGameType();
-        return display.getInput();
+    public Game createNewGame() {
+        String gameType = display.askForGameType();
+        String[] chosenMarks = getPlayerMarks(gameType);
+        game = setUpNewGame(gameType, chosenMarks);
+        return game;
     }
 
     private String[] getPlayerMarks(String gameType) {
@@ -39,12 +44,7 @@ public class GameFactory {
         return new Game(board, display, player1, player2, gameSaver);
     }
 
-    public Game reloadExistingGameIfNotOver() {
-        if (this.gameSaver.savedGameIsOver()) {
-            game = createNewGame();
-        } else {
-            game = this.gameSaver.reloadSavedGame();
-        }
-        return game;
+    public Game loadSavedGame() {
+        return this.gameSaver.reloadSavedGame();
     }
 }
