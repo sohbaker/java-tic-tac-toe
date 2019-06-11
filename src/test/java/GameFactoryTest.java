@@ -5,7 +5,7 @@ import static junit.framework.TestCase.assertTrue;
 public class GameFactoryTest {
     private GameFactory gameFactory;
     private DisplaySpy displaySpy;
-    private String filename = "factory_test.txt";
+    private String filename = "test_save.txt";
 
     @Before
     public void setUp() {
@@ -19,5 +19,11 @@ public class GameFactoryTest {
     public void canCreateANewGame() {
         Game newGame = gameFactory.createNewGame();
         assertTrue(newGame instanceof Game);
+    }
+
+    @Test
+    public void canReloadASavedGame() {
+        gameFactory.reloadExistingGameIfNotOver();
+        assertTrue(displaySpy.confirmGameReloadedShouldHaveBeenCalled());
     }
 }

@@ -1,6 +1,7 @@
 public class GameFactory {
     private Display display;
     private GameSaver gameSaver;
+    private Game game;
 
     public GameFactory(Display display, String filename) {
         this.display = display;
@@ -10,14 +11,13 @@ public class GameFactory {
     public Game createNewGame() {
         String gameType = getGameType();
         String[] chosenMarks = getPlayerMarks(gameType);
-        Game game = setUpNewGame(gameType, chosenMarks);
+        game = setUpNewGame(gameType, chosenMarks);
         return game;
     }
 
     private String getGameType() {
         display.askForGameType();
-        String gameType = display.getInput();
-        return gameType;
+        return display.getInput();
     }
 
     private String[] getPlayerMarks(String gameType) {
@@ -39,4 +39,12 @@ public class GameFactory {
         return new Game(board, display, player1, player2, gameSaver);
     }
 
+    public Game reloadExistingGameIfNotOver() {
+        if (this.gameSaver.savedGameIsOver()) {
+            game = createNewGame();
+        } else {
+            game = this.gameSaver.reloadSavedGame();
+        }
+        return game;
+    }
 }
