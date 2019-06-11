@@ -1,8 +1,7 @@
 public class Run {
     private static Game game;
     private static Display display = new Display(System.out, System.in);
-    private static String filename = "saved_game.txt";
-    private static GameSaver gameSaver = new GameSaver(filename, display);
+    private static GameSaver gameSaver;
 
     public static void main(String[] args) {
         display.printGreeting();
@@ -16,6 +15,7 @@ public class Run {
     }
 
     private static void determineWhatTypeOfGameToLoad(String arg) {
+        gameSaver = new GameSaver(arg, display);
         if (gameSaver.savedGameIsOver()) {
             createNewGame();
         } else {
