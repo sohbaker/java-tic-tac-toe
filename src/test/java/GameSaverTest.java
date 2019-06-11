@@ -1,7 +1,5 @@
 import org.junit.*;
-
-import static junit.framework.TestCase.assertFalse;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 
 public class GameSaverTest {
     private GameSaver gamesaver;
@@ -29,21 +27,21 @@ public class GameSaverTest {
     @Test
     public void canReadAFileOnceSaved() {
         gamesaver.saveGame(board, player1.getMark(), board.getOpponentMark(player1.getMark()));
-        gamesaver.readSavedFile();
+        gamesaver.readFile();
         assertTrue(gamesaver.fileRead);
     }
 
     @Test
     public void knowsWhetherTheSavedGameIsOver() {
         gamesaver.saveGame(board, player1.getMark(), board.getOpponentMark(player1.getMark()));
-        gamesaver.readSavedFile();
+        gamesaver.readFile();
         assertFalse(gamesaver.savedGameIsOver());
     }
 
     @Test
     public void canReloadAPreviouslySavedGame() {
         gamesaver.saveGame(board, player1.getMark(), board.getOpponentMark(player1.getMark()));
-        gamesaver.readSavedFile();
+        gamesaver.readFile();
         gamesaver.reloadSavedGame();
         assertTrue(displaySpy.confirmGameReloadedShouldHaveBeenCalled());
     }
