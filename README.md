@@ -1,9 +1,10 @@
 # Java Tic Tac Toe
 
 ## Tasks
-- [X] Create a Human vs Human Tic Tac Toe game in Java, to run on the command line.
-- [X] Create a Human vs Computer Tic Tac Toe game in Java, to run on the command line.
-- [X] Create a feature which allows the user to save and reload a game.
+Create a Tic Tac Toe game in Java, to run on the command line, which:
+- [X] Allows a user to play a Human vs Human game.
+- [X] Allows a user to play a Human vs Computer game.
+- [X] Allows the user to save an in progress game and reload it later.
 
 ## Language
 This application is written in [Java](https://openjdk.java.net/) version 12.0.1.
@@ -15,5 +16,4 @@ This application uses [Gradle](https://docs.gradle.org/current/userguide/what_is
 
 ## Running the application
 1. Type `gradle clean build` or `./gradlew clean build` to compile.
-2. Type `gradle --console plain run` or `./gradlew --console plain run` to start a new game.
-3. To reload a saved game, add the filename as an argument when running the game, e.g.`./gradlew --console plain run --args='saved_game.txt'`.
+2. Type `gradle --console plain run` or `./gradlew --console plain run` to run the game.

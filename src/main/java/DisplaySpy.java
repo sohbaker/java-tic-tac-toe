@@ -20,6 +20,17 @@ public class DisplaySpy extends Display {
     }
 
     @Override
+    public String askForGameType() {
+        return getInput();
+    }
+
+    @Override
+    public String[] getPlayersToChooseMarks(String... args) {
+        String[] marks = {"X","O"};
+        return marks;
+    }
+
+    @Override
     public void notifyInvalid(String prompt) {
         this.invalid = true;
     }
